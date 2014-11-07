@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Metro</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="rail_line_name">
+        <item>Green</item>
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Silver</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+    </string-array>
+    <string-array name="rail_line_code">
+        <item>GR</item>
+        <item>RD</item>
+        <item>BL</item>
+        <item>SV</item>
+        <item>OR</item>
+        <item>YL</item>
+    </string-array>
+    <string-array name="red_line_station">
+        <item>Shady Grove</item>
+        <item>Rockville</item>
+        <item>Twinbrook</item>
+        <item>White Flint</item>
+        <item>Grosvenor</item>
+        <item>Medical Center</item>
+        <item>Bethesda</item>
+        <item>Friendship Heights</item>
+        <item>Tenleytown</item>
+        <item>Van Ness UDC</item>
+        <item>Cleveland Park</item>
+        <item>Woodley Park Zoo</item>
+        <item>Dupont Circle</item>
+        <item>Farragut North</item>
+        <item>Metro Center</item>
+        <item>Gallery Place</item>
+        <item>Judiciary Square</item>
+        <item>Union Station</item>
+        <item>New York Avenue</item>
+        <item>Rhode Island Avenue</item>
+        <item>Brookland</item>
+        <item>Fort Totten</item>
+        <item>Takoma</item>
+        <item>Silver Spring</item>
+        <item>Forest Glen</item>
+        <item>Wheaton</item>
+        <item>Glenmont</item>
+    </string-array>
+    <string-array name="red_line_station_code">
+        <item>A15</item>
+        <item>A14</item>
+        <item>A13</item>
+        <item>A12</item>
+        <item>A11</item>
+        <item>A10</item>
+        <item>A09</item>
+        <item>A08</item>
+        <item>A07</item>
+        <item>A06</item>
+        <item>A05</item>
+        <item>A04</item>
+        <item>A03</item>
+        <item>A02</item>
+        <item>A01</item>
+        <item>B01</item>
+        <item>B02</item>
+        <item>B03</item>
+        <item>B35</item>
+        <item>B04</item>
+        <item>B05</item>
+        <item>B06</item>
+        <item>B07</item>
+        <item>B08</item>
+        <item>B09</item>
+        <item>B10</item>
+        <item>B11</item>
+    </string-array>
+    <string-array name="blue_line_station">
+        <item>Franconia-Springf’ld</item>
+        <item>Van Dorn St</item>
+        <item>King Street</item>
+        <item>Braddock Road</item>
+        <item>National Arpt</item>
+        <item>Crystal City</item>
+        <item>Pentagon City</item>
+        <item>Pentagon</item>
+        <item>Arlington Cemetery</item>
+        <item>Rosslyn</item>
+        <item>Foggy Bottom</item>
+        <item>Farragut West</item>
+        <item>McPherson Square</item>
+        <item>Metro Center</item>
+        <item>Federal Triangle</item>
+        <item>Smithsonian</item>
+        <item>L’Enfant Plaza</item>
+        <item>Federal Center SW</item>
+        <item>Capitol South</item>
+        <item>Eastern Market</item>
+        <item>Potomac Avenue</item>
+        <item>Stadium Armory</item>
+        <item>Benning Road</item>
+        <item>Capitol Heights</item>
+        <item>Addison Road</item>
+        <item>Morgan Blvd</item>
+        <item>Largo Town Center</item>
+    </string-array>
+    <string-array name="blue_line_station_code">
+        <item>J03</item>
+        <item>J02</item>
+        <item>C13</item>
+        <item>C12</item>
+        <item>C10</item>
+        <item>C09</item>
+        <item>C08</item>
+        <item>C07</item>
+        <item>C06</item>
+        <item>C05</item>
+        <item>C04</item>
+        <item>C03</item>
+        <item>C02</item>
+        <item>C01</item>
+        <item>D01</item>
+        <item>D02</item>
+        <item>D03</item>
+        <item>D04</item>
+        <item>D05</item>
+        <item>D06</item>
+        <item>D07</item>
+        <item>D08</item>
+        <item>G01</item>
+        <item>G02</item>
+        <item>G03</item>
+        <item>G04</item>
+        <item>G05</item>
+    </string-array>
+    <string-array name="orange_line_station">
+        <item>Vienna</item>
+        <item>Dunn Loring</item>
+        <item>W Falls Church</item>
+        <item>E Falls Church</item>
+        <item>Ballston</item>
+        <item>Virginia Square</item>
+        <item>Clarendon</item>
+        <item>Court House</item>
+        <item>Rosslyn</item>
+        <item>Foggy Bottom</item>
+        <item>Farragut West</item>
+        <item>McPherson Square</item>
+        <item>Metro Center</item>
+        <item>Federal Triangle</item>
+        <item>Smithsonian</item>
+        <item>L’Enfant Plaza</item>
+        <item>Federal Center SW</item>
+        <item>Capitol South</item>
+        <item>Eastern Market</item>
+        <item>Potomac Avenue</item>
+        <item>Stadium Armory</item>
+        <item>Minnesota Avenue</item>
+        <item>Deanwood</item>
+        <item>Cheverly</item>
+        <item>Landover</item>
+        <item>New Carrollton</item>
+    </string-array>
+    <string-array name="orange_line_station_code">
+        <item>K08</item>
+        <item>K07</item>
+        <item>K06</item>
+        <item>K05</item>
+        <item>K04</item>
+        <item>K03</item>
+        <item>K02</item>
+        <item>K01</item>
+        <item>C05</item>
+        <item>C04</item>
+        <item>C03</item>
+        <item>C02</item>
+        <item>C01</item>
+        <item>D01</item>
+        <item>D02</item>
+        <item>D03</item>
+        <item>D04</item>
+        <item>D05</item>
+        <item>D06</item>
+        <item>D07</item>
+        <item>D08</item>
+        <item>D09</item>
+        <item>D10</item>
+        <item>D11</item>
+        <item>D12</item>
+        <item>D13</item>
+    </string-array>
+    <string-array name="silver_line_station">
+        <item>Wiehle-Reston East</item>
+        <item>Spring Hill</item>
+        <item>Greensboro</item>
+        <item>Tysons Corner</item>
+        <item>McLean</item>
+        <item>E Falls Church</item>
+        <item>Ballston</item>
+        <item>Virginia Square</item>
+        <item>Clarendon</item>
+        <item>Court House</item>
+        <item>Rosslyn</item>
+        <item>Foggy Bottom</item>
+        <item>Farragut West</item>
+        <item>McPherson Square</item>
+        <item>Metro Center</item>
+        <item>Federal Triangle</item>
+        <item>Smithsonian</item>
+        <item>L’Enfant Plaza</item>
+        <item>Federal Center SW</item>
+        <item>Capitol South</item>
+        <item>Eastern Market</item>
+        <item>Potomac Avenue</item>
+        <item>Stadium Armory</item>
+        <item>Benning Road</item>
+        <item>Capitol Heights</item>
+        <item>Addison Road</item>
+        <item>Morgan Blvd</item>
+        <item>Largo Town Center</item>
+    </string-array>
+    <string-array name="silver_line_station_code">
+        <item>N06</item>
+        <item>N04</item>
+        <item>N03</item>
+        <item>N02</item>
+        <item>N01</item>
+        <item>K05</item>
+        <item>K04</item>
+        <item>K03</item>
+        <item>K02</item>
+        <item>K01</item>
+        <item>C05</item>
+        <item>C04</item>
+        <item>C03</item>
+        <item>C02</item>
+        <item>C01</item>
+        <item>D01</item>
+        <item>D02</item>
+        <item>D03</item>
+        <item>D04</item>
+        <item>D05</item>
+        <item>D06</item>
+        <item>D07</item>
+        <item>D08</item>
+        <item>G01</item>
+        <item>G02</item>
+        <item>G03</item>
+        <item>G04</item>
+        <item>G05</item>
+    </string-array>
+    <string-array name="yellow_line_station">
+        <item>Huntington</item>
+        <item>Eisenhower Avenue</item>
+        <item>King Street</item>
+        <item>Braddock Road</item>
+        <item>National Arpt</item>
+        <item>Crystal City</item>
+        <item>Pentagon City</item>
+        <item>Pentagon</item>
+        <item>L’Enfant Plaza</item>
+        <item>Archives</item>
+        <item>Gallery Place</item>
+        <item>Mt Vernon Sq</item>
+        <item>Shaw</item>
+        <item>U Street</item>
+        <item>Columbia Heights</item>
+        <item>Georgia Avenue</item>
+        <item>Fort Totten"</item>
+    </string-array>
+    <string-array name="yellow_line_station_code">
+        <item>C15</item>
+        <item>C14</item>
+        <item>C13</item>
+        <item>C12</item>
+        <item>C10</item>
+        <item>C09</item>
+        <item>C08</item>
+        <item>C07</item>
+        <item>F03</item>
+        <item>F02</item>
+        <item>F01</item>
+        <item>E01</item>
+        <item>E02</item>
+        <item>E03</item>
+        <item>E04</item>
+        <item>E05</item>
+        <item>E06"</item>
+    </string-array>
+    <string-array name="green_line_station">
+        <item>Branch Avenue</item>
+        <item>Suitland</item>
+        <item>Naylor Road</item>
+        <item>Southern Ave</item>
+        <item>Congress Height</item>
+        <item>Anacostia</item>
+        <item>Navy Yard</item>
+        <item>Waterfront</item>
+        <item>L’Enfant Plaza</item>
+        <item>Archives</item>
+        <item>Gallery Place</item>
+        <item>Mt Vernon Sq</item>
+        <item>Shaw</item>
+        <item>U Street</item>
+        <item>Columbia Heights</item>
+        <item>Georgia Avenue</item>
+        <item>Fort Totten</item>
+        <item>West Hyattsville</item>
+        <item>Prince Georges Plaza</item>
+        <item>College Park</item>
+        <item>Greenbelt</item>
+    </string-array>
+    <string-array name="green_line_station_code">
+        <item>F11</item>
+        <item>F10</item>
+        <item>F09</item>
+        <item>F08</item>
+        <item>F07</item>
+        <item>F06</item>
+        <item>F05</item>
+        <item>F04</item>
+        <item>F03</item>
+        <item>F02</item>
+        <item>F01</item>
+        <item>E01</item>
+        <item>E02</item>
+        <item>E03</item>
+        <item>E04</item>
+        <item>E05</item>
+        <item>E06</item>
+        <item>E07</item>
+        <item>E08</item>
+        <item>E09</item>
+        <item>E10</item>
+    </string-array>
+
+</resources>
