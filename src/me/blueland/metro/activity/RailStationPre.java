@@ -23,12 +23,17 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.SimpleAdapter.ViewBinder;
+import android.widget.TextView;
 
 public class RailStationPre extends Activity {
 
@@ -44,21 +49,6 @@ public class RailStationPre extends Activity {
 		System.out.println("oncreate");
 		initView();
 		init();
-	}
-
-	protected void onPause() {
-		super.onPause();
-		Log.i("onPause", "=====");
-	}
-
-	protected void onResume() {
-		super.onResume();
-		Log.i("onResume", "=====");
-	}
-
-	protected void onDestroy() {
-		super.onDestroy();
-		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 
 	// 逻辑未分离
@@ -129,13 +119,15 @@ public class RailStationPre extends Activity {
 			// TODO Auto-generated method stub
 			// List<RailStationPrediction> railstationpredictions = null;
 			List<Map<String, Object>> listMap;
-
 			RailStationPrediction railstationprediction;
 
 			listMap = new ArrayList<Map<String, Object>>();
 			for (int i = 0; i < railstationpredictions.size(); i++) {
 				if ((railstationprediction = railstationpredictions.get(i)) != null) {
 					Map<String, Object> map = new HashMap<String, Object>();
+					int image = drawableSelection(railstationprediction
+							.getLINE().toString());
+					map.put("img", image);
 					map.put("lines", railstationprediction.getLINE().toString());
 					map.put("mins", railstationprediction.getMIN().toString());
 					map.put("destinationame", railstationprediction
@@ -146,12 +138,27 @@ public class RailStationPre extends Activity {
 
 			SimpleAdapter simpleAdapter = new SimpleAdapter(getApplication(),
 					listMap, R.layout.rail_station_pre_activity_item,
-					new String[] { "lines", "mins", "destinationame" },
-					new int[] { R.id.lineName, R.id.predictionMin,
-							R.id.destinationName });
+					new String[] { "img", "lines", "mins", "destinationame" },
+					new int[] { R.id.color_line, R.id.lineName,
+							R.id.predictionMin, R.id.destinationName });
 			listView.setAdapter(simpleAdapter);
 			super.onPostExecute(railstationpredictions);
 		}
+	}
+
+	private int drawableSelection(String color) {
+		if (color.equals("SV")) {
+			return R.drawable.silver;
+		} else if (color.equals("GR")) {
+			return R.drawable.green;
+		} else if (color.equals("RD")) {
+			return R.drawable.red;
+		} else if (color.equals("YL")) {
+			return R.drawable.yellow;
+		} else if (color.equals("OR")) {
+			return R.drawable.orange;
+		} else
+			return R.drawable.blue;
 	}
 
 	// 解析JSON,并且封装
