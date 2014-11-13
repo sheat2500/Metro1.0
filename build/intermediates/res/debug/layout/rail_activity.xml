@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="me.blueland.metro" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/red_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="red" />
+
+            <Button
+                android:id="@+id/blue_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/yellow_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="yellow" />
+
+            <Button
+                android:id="@+id/green_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="green" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/silver_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="silver" />
+
+            <Button
+                android:id="@+id/orange_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="orange" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ListView
+            android:id="@+id/showTrainStation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/res/layout/rail_activity.xml -->

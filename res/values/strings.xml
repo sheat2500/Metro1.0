@@ -337,5 +337,11 @@
         <item>E09</item>
         <item>E10</item>
     </string-array>
+    
+    <string-array name="station_Latitude">
+        
+        
+        
+    </string-array>
 
 </resources>

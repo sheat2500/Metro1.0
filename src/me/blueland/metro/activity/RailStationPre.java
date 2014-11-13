@@ -23,17 +23,11 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.SimpleAdapter.ViewBinder;
-import android.widget.TextView;
 
 public class RailStationPre extends Activity {
 
@@ -43,6 +37,7 @@ public class RailStationPre extends Activity {
 	private String stationCode;
 	List<RailStationPrediction> railstationpredictions;
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rail_station_pre_activity);

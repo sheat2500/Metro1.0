@@ -3,13 +3,10 @@ package me.blueland.metro.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import me.blueland.metro.R;
 import me.blueland.metro.model.RailStationPrediction;
 
 import org.apache.http.HttpEntity;
@@ -23,8 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.widget.SimpleAdapter;
 
 public class RailController extends
 		AsyncTask<String, Integer, List<RailStationPrediction>> {
