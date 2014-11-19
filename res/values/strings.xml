@@ -21,63 +21,51 @@
         <item>OR</item>
         <item>YL</item>
     </string-array>
-    <string-array name="red_line_station">
-        <item>Shady Grove</item>
-        <item>Rockville</item>
-        <item>Twinbrook</item>
-        <item>White Flint</item>
-        <item>Grosvenor</item>
-        <item>Medical Center</item>
-        <item>Bethesda</item>
-        <item>Friendship Heights</item>
-        <item>Tenleytown</item>
-        <item>Van Ness UDC</item>
-        <item>Cleveland Park</item>
-        <item>Woodley Park Zoo</item>
-        <item>Dupont Circle</item>
-        <item>Farragut North</item>
-        <item>Metro Center</item>
+    <string-array name="green_line_station">
+        <item>Branch Avenue</item>
+        <item>Suitland</item>
+        <item>Naylor Road</item>
+        <item>Southern Ave</item>
+        <item>Congress Height</item>
+        <item>Anacostia</item>
+        <item>Navy Yard</item>
+        <item>Waterfront</item>
+        <item>L’Enfant Plaza</item>
+        <item>Archives</item>
         <item>Gallery Place</item>
-        <item>Judiciary Square</item>
-        <item>Union Station</item>
-        <item>New York Avenue</item>
-        <item>Rhode Island Avenue</item>
-        <item>Brookland</item>
+        <item>Mt Vernon Sq</item>
+        <item>Shaw</item>
+        <item>U Street</item>
+        <item>Columbia Heights</item>
+        <item>Georgia Avenue</item>
         <item>Fort Totten</item>
-        <item>Takoma</item>
-        <item>Silver Spring</item>
-        <item>Forest Glen</item>
-        <item>Wheaton</item>
-        <item>Glenmont</item>
+        <item>West Hyattsville</item>
+        <item>Prince Georges Plaza</item>
+        <item>College Park</item>
+        <item>Greenbelt</item>
     </string-array>
-    <string-array name="red_line_station_code">
-        <item>A15</item>
-        <item>A14</item>
-        <item>A13</item>
-        <item>A12</item>
-        <item>A11</item>
-        <item>A10</item>
-        <item>A09</item>
-        <item>A08</item>
-        <item>A07</item>
-        <item>A06</item>
-        <item>A05</item>
-        <item>A04</item>
-        <item>A03</item>
-        <item>A02</item>
-        <item>A01</item>
-        <item>B01</item>
-        <item>B02</item>
-        <item>B03</item>
-        <item>B35</item>
-        <item>B04</item>
-        <item>B05</item>
-        <item>B06</item>
-        <item>B07</item>
-        <item>B08</item>
-        <item>B09</item>
-        <item>B10</item>
-        <item>B11</item>
+    <string-array name="green_line_station_code">
+        <item>F11</item>
+        <item>F10</item>
+        <item>F09</item>
+        <item>F08</item>
+        <item>F07</item>
+        <item>F06</item>
+        <item>F05</item>
+        <item>F04</item>
+        <item>F03</item>
+        <item>F02</item>
+        <item>F01</item>
+        <item>E01</item>
+        <item>E02</item>
+        <item>E03</item>
+        <item>E04</item>
+        <item>E05</item>
+        <item>E06</item>
+        <item>E07</item>
+        <item>E08</item>
+        <item>E09</item>
+        <item>E10</item>
     </string-array>
     <string-array name="blue_line_station">
         <item>Franconia-Springf’ld</item>
@@ -136,62 +124,6 @@
         <item>G03</item>
         <item>G04</item>
         <item>G05</item>
-    </string-array>
-    <string-array name="orange_line_station">
-        <item>Vienna</item>
-        <item>Dunn Loring</item>
-        <item>W Falls Church</item>
-        <item>E Falls Church</item>
-        <item>Ballston</item>
-        <item>Virginia Square</item>
-        <item>Clarendon</item>
-        <item>Court House</item>
-        <item>Rosslyn</item>
-        <item>Foggy Bottom</item>
-        <item>Farragut West</item>
-        <item>McPherson Square</item>
-        <item>Metro Center</item>
-        <item>Federal Triangle</item>
-        <item>Smithsonian</item>
-        <item>L’Enfant Plaza</item>
-        <item>Federal Center SW</item>
-        <item>Capitol South</item>
-        <item>Eastern Market</item>
-        <item>Potomac Avenue</item>
-        <item>Stadium Armory</item>
-        <item>Minnesota Avenue</item>
-        <item>Deanwood</item>
-        <item>Cheverly</item>
-        <item>Landover</item>
-        <item>New Carrollton</item>
-    </string-array>
-    <string-array name="orange_line_station_code">
-        <item>K08</item>
-        <item>K07</item>
-        <item>K06</item>
-        <item>K05</item>
-        <item>K04</item>
-        <item>K03</item>
-        <item>K02</item>
-        <item>K01</item>
-        <item>C05</item>
-        <item>C04</item>
-        <item>C03</item>
-        <item>C02</item>
-        <item>C01</item>
-        <item>D01</item>
-        <item>D02</item>
-        <item>D03</item>
-        <item>D04</item>
-        <item>D05</item>
-        <item>D06</item>
-        <item>D07</item>
-        <item>D08</item>
-        <item>D09</item>
-        <item>D10</item>
-        <item>D11</item>
-        <item>D12</item>
-        <item>D13</item>
     </string-array>
     <string-array name="silver_line_station">
         <item>Wiehle-Reston East</item>
@@ -253,6 +185,120 @@
         <item>G04</item>
         <item>G05</item>
     </string-array>
+    <string-array name="red_line_station">
+        <item>Shady Grove</item>
+        <item>Rockville</item>
+        <item>Twinbrook</item>
+        <item>White Flint</item>
+        <item>Grosvenor</item>
+        <item>Medical Center</item>
+        <item>Bethesda</item>
+        <item>Friendship Heights</item>
+        <item>Tenleytown</item>
+        <item>Van Ness UDC</item>
+        <item>Cleveland Park</item>
+        <item>Woodley Park Zoo</item>
+        <item>Dupont Circle</item>
+        <item>Farragut North</item>
+        <item>Metro Center</item>
+        <item>Gallery Place</item>
+        <item>Judiciary Square</item>
+        <item>Union Station</item>
+        <item>New York Avenue</item>
+        <item>Rhode Island Avenue</item>
+        <item>Brookland</item>
+        <item>Fort Totten</item>
+        <item>Takoma</item>
+        <item>Silver Spring</item>
+        <item>Forest Glen</item>
+        <item>Wheaton</item>
+        <item>Glenmont</item>
+    </string-array>
+    <string-array name="red_line_station_code">
+        <item>A15</item>
+        <item>A14</item>
+        <item>A13</item>
+        <item>A12</item>
+        <item>A11</item>
+        <item>A10</item>
+        <item>A09</item>
+        <item>A08</item>
+        <item>A07</item>
+        <item>A06</item>
+        <item>A05</item>
+        <item>A04</item>
+        <item>A03</item>
+        <item>A02</item>
+        <item>A01</item>
+        <item>B01</item>
+        <item>B02</item>
+        <item>B03</item>
+        <item>B35</item>
+        <item>B04</item>
+        <item>B05</item>
+        <item>B06</item>
+        <item>B07</item>
+        <item>B08</item>
+        <item>B09</item>
+        <item>B10</item>
+        <item>B11</item>
+    </string-array>
+    <string-array name="orange_line_station">
+        <item>Vienna</item>
+        <item>Dunn Loring</item>
+        <item>W Falls Church</item>
+        <item>E Falls Church</item>
+        <item>Ballston</item>
+        <item>Virginia Square</item>
+        <item>Clarendon</item>
+        <item>Court House</item>
+        <item>Rosslyn</item>
+        <item>Foggy Bottom</item>
+        <item>Farragut West</item>
+        <item>McPherson Square</item>
+        <item>Metro Center</item>
+        <item>Federal Triangle</item>
+        <item>Smithsonian</item>
+        <item>L’Enfant Plaza</item>
+        <item>Federal Center SW</item>
+        <item>Capitol South</item>
+        <item>Eastern Market</item>
+        <item>Potomac Avenue</item>
+        <item>Stadium Armory</item>
+        <item>Minnesota Avenue</item>
+        <item>Deanwood</item>
+        <item>Cheverly</item>
+        <item>Landover</item>
+        <item>New Carrollton</item>
+    </string-array>
+    <string-array name="orange_line_station_code">
+        <item>K08</item>
+        <item>K07</item>
+        <item>K06</item>
+        <item>K05</item>
+        <item>K04</item>
+        <item>K03</item>
+        <item>K02</item>
+        <item>K01</item>
+        <item>C05</item>
+        <item>C04</item>
+        <item>C03</item>
+        <item>C02</item>
+        <item>C01</item>
+        <item>D01</item>
+        <item>D02</item>
+        <item>D03</item>
+        <item>D04</item>
+        <item>D05</item>
+        <item>D06</item>
+        <item>D07</item>
+        <item>D08</item>
+        <item>D09</item>
+        <item>D10</item>
+        <item>D11</item>
+        <item>D12</item>
+        <item>D13</item>
+    </string-array>
     <string-array name="yellow_line_station">
         <item>Huntington</item>
         <item>Eisenhower Avenue</item>
@@ -291,57 +337,321 @@
         <item>E05</item>
         <item>E06"</item>
     </string-array>
-    <string-array name="green_line_station">
-        <item>Branch Avenue</item>
-        <item>Suitland</item>
-        <item>Naylor Road</item>
-        <item>Southern Ave</item>
-        <item>Congress Height</item>
-        <item>Anacostia</item>
-        <item>Navy Yard</item>
-        <item>Waterfront</item>
-        <item>L’Enfant Plaza</item>
-        <item>Archives</item>
-        <item>Gallery Place</item>
-        <item>Mt Vernon Sq</item>
-        <item>Shaw</item>
-        <item>U Street</item>
-        <item>Columbia Heights</item>
-        <item>Georgia Avenue</item>
-        <item>Fort Totten</item>
-        <item>West Hyattsville</item>
-        <item>Prince Georges Plaza</item>
-        <item>College Park</item>
-        <item>Greenbelt</item>
+    <string-array name="green_line_station_Latitude">
+        <item>38.8264463483</item>
+        <item>38.8439645544</item>
+        <item>38.8513013835</item>
+        <item>38.8410857803</item>
+        <item>38.8456577028</item>
+        <item>38.8629631168</item>
+        <item>38.8764810849</item>
+        <item>38.8764618668</item>
+        <item>38.8848377279</item>
+        <item>38.8936652235</item>
+        <item>38.8983168097</item>
+        <item>38.9064368149</item>
+        <item>38.9134768711</item>
+        <item>38.9170023992</item>
+        <item>38.9278379675</item>
+        <item>38.9374346301</item>
+        <item>38.9518467675</item>
+        <item>38.9550401707</item>
+        <item>38.9653854458</item>
+        <item>38.9786336339</item>
+        <item>39.0111458605</item>
     </string-array>
-    <string-array name="green_line_station_code">
-        <item>F11</item>
-        <item>F10</item>
-        <item>F09</item>
-        <item>F08</item>
-        <item>F07</item>
-        <item>F06</item>
-        <item>F05</item>
-        <item>F04</item>
-        <item>F03</item>
-        <item>F02</item>
-        <item>F01</item>
-        <item>E01</item>
-        <item>E02</item>
-        <item>E03</item>
-        <item>E04</item>
-        <item>E05</item>
-        <item>E06</item>
-        <item>E07</item>
-        <item>E08</item>
-        <item>E09</item>
-        <item>E10</item>
+    <string-array name="blue_line_station_Latitude">
+        <item>38.7665218926</item>
+        <item>38.799307672</item>
+        <item>38.8065861172</item>
+        <item>38.8141436672</item>
+        <item>38.8534163859</item>
+        <item>38.8579043204</item>
+        <item>38.8618823867</item>
+        <item>38.8694627012</item>
+        <item>38.8846868585</item>
+        <item>38.8959790962</item>
+        <item>38.9006980092</item>
+        <item>38.9013128941</item>
+        <item>38.9013327968</item>
+        <item>38.8983144732</item>
+        <item>38.8931808718</item>
+        <item>38.888018702</item>
+        <item>38.8848377279</item>
+        <item>38.8850723551</item>
+        <item>38.8850625009</item>
+        <item>38.8846222608</item>
+        <item>38.8812632736</item>
+        <item>38.8867090898</item>
+        <item>38.890975676</item>
+        <item>38.8894658568</item>
+        <item>38.8867478168</item>
+        <item>38.8938349282</item>
+        <item>38.9050688072</item>
     </string-array>
-    
-    <string-array name="station_Latitude">
-        
-        
-        
+    <string-array name="silver_line_station_Latitude">
+        <item>38.94778</item>
+        <item>38.928872</item>
+        <item>38.921732</item>
+        <item>38.920496</item>
+        <item>38.924432</item>
+        <item>38.8859531663</item>
+        <item>38.882161</item>
+        <item>38.8833661518</item>
+        <item>38.886704839</item>
+        <item>38.8901755312</item>
+        <item>38.8959790962</item>
+        <item>38.9006980092</item>
+        <item>38.9013128941</item>
+        <item>38.9013327968</item>
+        <item>38.8983144732</item>
+        <item>38.8931808718</item>
+        <item>38.888018702</item>
+        <item>38.8848377279</item>
+        <item>38.8850723551</item>
+        <item>38.8850625009</item>
+        <item>38.8846222608</item>
+        <item>38.8812632736</item>
+        <item>38.8867090898</item>
+        <item>38.890975676</item>
+        <item>38.8894658568</item>
+        <item>38.8867478168</item>
+        <item>38.8938349282</item>
+        <item>38.9050688072</item>
+    </string-array>
+    <string-array name="red_line_station_Latitude">
+        <item>39.1199273249</item>
+        <item>39.0843216075</item>
+        <item>39.0624676517</item>
+        <item>39.0481513573</item>
+        <item>39.02926895</item>
+        <item>39.0000564843</item>
+        <item>38.9843936603</item>
+        <item>38.9594838736</item>
+        <item>38.9488514351</item>
+        <item>38.9432652883</item>
+        <item>38.9347628908</item>
+        <item>38.9250851371</item>
+        <item>38.9095980575</item>
+        <item>38.9032019462</item>
+        <item>38.8983144732</item>
+        <item>38.8983168097</item>
+        <item>38.8960903176</item>
+        <item>38.8977660392</item>
+        <item>38.9070162121</item>
+        <item>38.9210596891</item>
+        <item>38.9332109913</item>
+        <item>38.9518467675</item>
+        <item>38.976078531</item>
+        <item>38.9939493747</item>
+        <item>39.0149542752</item>
+        <item>39.0375271436</item>
+        <item>39.0617837655</item>
+    </string-array>
+    <string-array name="orange_line_station_Latitude">
+        <item>38.878077</item>
+        <item>38.8836251359</item>
+        <item>38.900780551</item>
+        <item>38.8859531663</item>
+        <item>38.882161</item>
+        <item>38.8833661518</item>
+        <item>38.886704839</item>
+        <item>38.8901755312</item>
+        <item>38.8959790962</item>
+        <item>38.9006980092</item>
+        <item>38.9013128941</item>
+        <item>38.9013327968</item>
+        <item>38.8983144732</item>
+        <item>38.8931808718</item>
+        <item>38.888018702</item>
+        <item>38.8848377279</item>
+        <item>38.8850723551</item>
+        <item>38.8850625009</item>
+        <item>38.8846222608</item>
+        <item>38.8812632736</item>
+        <item>38.8867090898</item>
+        <item>38.899191223</item>
+        <item>38.9081784965</item>
+        <item>38.9166318546</item>
+        <item>38.9335062344</item>
+        <item>38.9477848558</item>
+    </string-array>
+    <string-array name="yellow_line_station_Latitude">
+        <item>38.7939158529</item>
+        <item>38.8004254497</item>
+        <item>38.8065861172</item>
+        <item>38.8141436672</item>
+        <item>38.8534163859</item>
+        <item>38.8579043204</item>
+        <item>38.8618823867</item>
+        <item>38.8694627012</item>
+        <item>38.8848377279</item>
+        <item>38.8936652235</item>
+        <item>38.8983168097</item>
+        <item>38.9064368149</item>
+        <item>38.9134768711</item>
+        <item>38.9170023992</item>
+        <item>38.9278379675</item>
+        <item>38.9374346301</item>
+        <item>38.9518467675</item>
+    </string-array>
+    <string-array name="green_line_station_longitude">
+        <item>-76.9114642177</item>
+        <item>-76.9318701589</item>
+        <item>-76.95626270939999</item>
+        <item>-76.9750541388</item>
+        <item>-76.98851193260001</item>
+        <item>-76.9953707387</item>
+        <item>-77.00508565130001</item>
+        <item>-77.0175052088</item>
+        <item>-77.02190848399999</item>
+        <item>-77.0219143879</item>
+        <item>-77.0219153904</item>
+        <item>-77.0219143803</item>
+        <item>-77.0219117007</item>
+        <item>-77.02749589290001</item>
+        <item>-77.03255211770001</item>
+        <item>-77.023460904</item>
+        <item>-77.0022030768</item>
+        <item>-76.9695766751</item>
+        <item>-76.9558815078</item>
+        <item>-76.9281249818</item>
+        <item>-76.9110575731</item>
+    </string-array>
+    <string-array name="blue_line_station_longitude">
+        <item>-77.1679701804</item>
+        <item>-77.1291115237</item>
+        <item>-77.0608112085</item>
+        <item>-77.053667574</item>
+        <item>-77.0440422943</item>
+        <item>-77.0502898097</item>
+        <item>-77.05953892150001</item>
+        <item>-77.05371567340001</item>
+        <item>-77.0628101291</item>
+        <item>-77.0709086853</item>
+        <item>-77.05027773899999</item>
+        <item>-77.0406954151</item>
+        <item>-77.03363417209999</item>
+        <item>-77.0280779971</item>
+        <item>-77.0281319984</item>
+        <item>-77.0280662342</item>
+        <item>-77.02190848399999</item>
+        <item>-77.0158682169</item>
+        <item>-77.0051394199</item>
+        <item>-76.99600112669999</item>
+        <item>-76.98549531960001</item>
+        <item>-76.97708890139999</item>
+        <item>-76.9383648681</item>
+        <item>-76.9118081145</item>
+        <item>-76.89410791</item>
+        <item>-76.8680747681</item>
+        <item>-76.84203752019999</item>
+    </string-array>
+    <string-array name="silver_line_station_longitude">
+        <item>-77.34027</item>
+        <item>-77.241472</item>
+        <item>-77.234607</item>
+        <item>-77.222262</item>
+        <item>-77.210295</item>
+        <item>-77.15688301989999</item>
+        <item>-77.1114848</item>
+        <item>-77.1029772942</item>
+        <item>-77.09539409830001</item>
+        <item>-77.087131231</item>
+        <item>-77.0709086853</item>
+        <item>-77.05027773899999</item>
+        <item>-77.0406954151</item>
+        <item>-77.03363417209999</item>
+        <item>-77.0280779971</item>
+        <item>-77.0281319984</item>
+        <item>-77.0280662342</item>
+        <item>-77.02190848399999</item>
+        <item>-77.0158682169</item>
+        <item>-77.0051394199</item>
+        <item>-76.99600112669999</item>
+        <item>-76.98549531960001</item>
+        <item>-76.97708890139999</item>
+        <item>-76.9383648681</item>
+        <item>-76.9118081145</item>
+        <item>-76.89410791</item>
+        <item>-76.8680747681</item>
+        <item>-76.84203752019999</item>
+    </string-array>
+    <string-array name="red_line_station_longitude">
+        <item>-77.16462733429999</item>
+        <item>-77.1461253392</item>
+        <item>-77.1208179517</item>
+        <item>-77.112829859</item>
+        <item>-77.10384972</item>
+        <item>-77.0969522905</item>
+        <item>-77.0941291922</item>
+        <item>-77.08499580500001</item>
+        <item>-77.0795873255</item>
+        <item>-77.0629861805</item>
+        <item>-77.0580425191</item>
+        <item>-77.0524180207</item>
+        <item>-77.04341435969999</item>
+        <item>-77.03970082719999</item>
+        <item>-77.0280779971</item>
+        <item>-77.0219153904</item>
+        <item>-77.0166389566</item>
+        <item>-77.00741429209999</item>
+        <item>-77.0030204472</item>
+        <item>-76.9959369166</item>
+        <item>-76.9945342851</item>
+        <item>-77.0022030768</item>
+        <item>-77.0181766987</item>
+        <item>-77.0310178268</item>
+        <item>-77.0429165548</item>
+        <item>-77.0501070535</item>
+        <item>-77.0535573593</item>
+    </string-array>
+    <string-array name="orange_line_station_longitude">
+        <item>-77.2726222569</item>
+        <item>-77.2271606721</item>
+        <item>-77.1890948225</item>
+        <item>-77.15688301989999</item>
+        <item>-77.1114848</item>
+        <item>-77.1029772942</item>
+        <item>-77.09539409830001</item>
+        <item>-77.087131231</item>
+        <item>-77.0709086853</item>
+        <item>-77.05027773899999</item>
+        <item>-77.0406954151</item>
+        <item>-77.03363417209999</item>
+        <item>-77.0280779971</item>
+        <item>-77.0281319984</item>
+        <item>-77.0280662342</item>
+        <item>-77.02190848399999</item>
+        <item>-77.0158682169</item>
+        <item>-77.0051394199</item>
+        <item>-76.99600112669999</item>
+        <item>-76.98549531960001</item>
+        <item>-76.97708890139999</item>
+        <item>-76.94674773360001</item>
+        <item>-76.935256783</item>
+        <item>-76.91662804400001</item>
+        <item>-76.89119796759999</item>
+        <item>-76.8718412865</item>
+    </string-array>
+    <string-array name="yellow_line_station_longitude">
+        <item>-77.0752057891</item>
+        <item>-77.0708743893</item>
+        <item>-77.0608112085</item>
+        <item>-77.053667574</item>
+        <item>-77.0440422943</item>
+        <item>-77.0502898097</item>
+        <item>-77.05953892150001</item>
+        <item>-77.05371567340001</item>
+        <item>-77.02190848399999</item>
+        <item>-77.0219143879</item>
+        <item>-77.0219153904</item>
+        <item>-77.0219143803</item>
+        <item>-77.0219117007</item>
+        <item>-77.02749589290001</item>
+        <item>-77.03255211770001</item>
+        <item>-77.023460904</item>
+        <item>-77.0022030768</item>
     </string-array>
 
 </resources>

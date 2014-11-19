@@ -1,11 +1,13 @@
 package me.blueland.metro.fragment;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import me.blueland.metro.R;
+import me.blueland.metro.model.Favourite;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +31,12 @@ public class RailFragment extends Fragment {
 	OnClickListener buttonOnclickListener;
 	OnItemClickListener onItemClickListener;
 	List<Map<String, Object>> listMap;
+	// get the clicked button showing which line for the next activity
+	int array_id = R.array.blue_line_station;
+	int code_id = R.array.blue_line_station_code;
+	int latitude_id = R.array.blue_line_station_Latitude;
+	int longitude_id = R.array.blue_line_station_Latitude;
+	String line = "BLUE";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,32 +82,49 @@ public class RailFragment extends Fragment {
 		buttonOnclickListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int array_id = R.array.blue_line_station;
-				int code_id = R.array.blue_line_station_code;
+
 				switch (v.getId()) {
 				case R.id.red_line:
+					line = "RED";
 					array_id = R.array.red_line_station;
 					code_id = R.array.red_line_station_code;
+					latitude_id = R.array.red_line_station_Latitude;
+					longitude_id = R.array.red_line_station_longitude;
 					break;
 				case R.id.blue_line:
+					line = "BLUE";
 					array_id = R.array.blue_line_station;
 					code_id = R.array.blue_line_station_code;
+					latitude_id = R.array.blue_line_station_Latitude;
+					longitude_id = R.array.blue_line_station_longitude;
 					break;
 				case R.id.green_line:
+					line = "GREEN";
 					array_id = R.array.green_line_station;
 					code_id = R.array.green_line_station_code;
+					latitude_id = R.array.green_line_station_Latitude;
+					longitude_id = R.array.green_line_station_longitude;
 					break;
 				case R.id.orange_line:
+					line = "ORANGE";
 					array_id = R.array.orange_line_station;
 					code_id = R.array.orange_line_station_code;
+					latitude_id = R.array.orange_line_station_Latitude;
+					longitude_id = R.array.orange_line_station_longitude;
 					break;
 				case R.id.silver_line:
+					line = "SILVER";
 					array_id = R.array.silver_line_station;
 					code_id = R.array.silver_line_station_code;
+					latitude_id = R.array.silver_line_station_Latitude;
+					longitude_id = R.array.silver_line_station_longitude;
 					break;
 				case R.id.yellow_line:
+					line = "YELLOW";
 					array_id = R.array.yellow_line_station;
 					code_id = R.array.yellow_line_station_code;
+					latitude_id = R.array.yellow_line_station_Latitude;
+					longitude_id = R.array.yellow_line_station_longitude;
 					break;
 				default:
 					break;
@@ -133,11 +158,22 @@ public class RailFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				TextView tv = (TextView) view.findViewById(R.id.stationCode);
-				String stationCode = tv.getText().toString();
+				String stationCode = ((TextView) view
+						.findViewById(R.id.stationCode)).getText().toString();
+				String stationName = ((TextView) view
+						.findViewById(R.id.stationName)).getText().toString();
 				Intent intent = new Intent(
 						"me.blueland.metro.activity.RailStationPre");
+				// transfer 5 parameters for the next activity
+				// postion for getting specific latitude and longitude in the
+				// next activity
+				intent.putExtra("intent", "RailFragment");
+				intent.putExtra("line", line);
+				intent.putExtra("position", position);
 				intent.putExtra("stationCode", stationCode);
+				intent.putExtra("stationName", stationName);
+				intent.putExtra("latitude", latitude_id);
+				intent.putExtra("longitude", longitude_id);
 				startActivity(intent);
 			}
 		};

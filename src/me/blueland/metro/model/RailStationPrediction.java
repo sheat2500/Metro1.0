@@ -9,7 +9,6 @@ public class RailStationPrediction {
 
 	public RailStationPrediction(String lINE, String mIN, String dESTINATION,
 			String dESTINATIONNAME) {
-		super();
 		LINE = lINE;
 		MIN = mIN;
 		DESTINATION = dESTINATION;
