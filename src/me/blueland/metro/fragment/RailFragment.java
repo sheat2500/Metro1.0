@@ -1,13 +1,11 @@
 package me.blueland.metro.fragment;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import me.blueland.metro.R;
-import me.blueland.metro.model.Favourite;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -145,7 +143,7 @@ public class RailFragment extends Fragment {
 				// The activity is a context (since Activity extends Context).
 
 				SimpleAdapter = new SimpleAdapter(getActivity(), listMap,
-						R.layout.rail_activity_item, new String[] { "array",
+						R.layout.fragment_rail_item, new String[] { "array",
 								"code" }, new int[] { R.id.stationName,
 								R.id.stationCode });
 				listview.setAdapter(SimpleAdapter);

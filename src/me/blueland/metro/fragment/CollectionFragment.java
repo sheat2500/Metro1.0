@@ -137,8 +137,12 @@ public class CollectionFragment extends Fragment {
 			// Test
 			railAdapter = new RailArrayAdapter(getActivity(),
 					R.layout.fragment_collection_item, collection_rail);
-			busAdapter = new BusArrayAdapter(getActivity(),
-					R.layout.fragment_collection_item, collection_bus);
+			
+			
+			// busAdapter = new BusArrayAdapter(getActivity(),
+			// R.layout.fragment_collection_item, collection_bus);
+			
+			
 			listBus.setAdapter(busAdapter);
 			listBus.setOnItemClickListener(BusonItemClickListener);
 			listRail.setAdapter(railAdapter);

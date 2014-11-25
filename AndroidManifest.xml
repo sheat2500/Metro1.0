@@ -21,7 +21,8 @@
         <activity
             android:name="me.blueland.metro.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,6 +35,16 @@
             android:theme="@style/MyTheme" >
             <intent-filter>
                 <action android:name="me.blueland.metro.activity.RailStationPre" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="me.blueland.metro.activity.BusStationPre"
+            android:label="@string/activity_bus"
+            android:theme="@style/MyTheme" >
+            <intent-filter>
+                <action android:name="me.blueland.metro.activity.BusStationPre" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

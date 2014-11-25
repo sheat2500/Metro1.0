@@ -1,8 +1,10 @@
 eclipse.preferences.version=1
+encoding//src/me/blueland/metro/activity/BusStationPre.java=UTF-8
 encoding//src/me/blueland/metro/activity/MainActivity.java=UTF-8
 encoding//src/me/blueland/metro/activity/Rail.java=UTF-8
 encoding//src/me/blueland/metro/activity/RailStationPre.java=UTF-8
 encoding//src/me/blueland/metro/controller/RailController.java=UTF-8
 encoding//src/me/blueland/metro/database/DBAdapter.java=UTF-8
 encoding//src/me/blueland/metro/fragment/CollectionFragment.java=UTF-8
+encoding//src/me/blueland/metro/fragment/MapFragment.java=UTF-8
 encoding//src/me/blueland/metro/fragment/RailFragment.java=UTF-8

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import me.blueland.metro.R;
 import me.blueland.metro.database.DBAdapter;
+import me.blueland.metro.model.BusStationPrediction;
 import me.blueland.metro.model.RailStationPrediction;
 
 import org.apache.http.HttpEntity;
@@ -42,14 +43,13 @@ import android.widget.SimpleAdapter;
  * 
  */
 
-public class RailStationPre extends Activity {
+public class BusStationPre extends Activity {
 
 	private Menu menu;
 	private ListView listView;
 	private ProgressDialog progressDialog;
-	private Button button;
 	private ActionBar actionBar;
-	private List<RailStationPrediction> railstationpredictions;
+	private List<BusStationPrediction> busStationPredictions;
 	private String stationCode;
 	private String stationName;
 	private String line;
@@ -73,8 +73,9 @@ public class RailStationPre extends Activity {
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		intent = getIntent();
-		if (intent.getStringExtra("intent").equals("RailFragment")) {
-			initViewFromRailFragment();
+		if (intent.getStringExtra("intent").equals("BusFragment")) {
+			initViewFromBusFragment();
+			System.out.println("test");
 		} else {
 			initViewFromCollectionFragment();
 		}
@@ -129,7 +130,7 @@ public class RailStationPre extends Activity {
 	// Circle: Listener - button onClick event - callback function
 	public boolean addToCollection(MenuItem item) {
 		adapter.open();
-		adapter.insertFavourate(line, stationName, stationCode, lat, lon, "1");
+		adapter.insertFavourate(line, stationName, stationCode, lat, lon, "0");
 		item.setEnabled(false);
 		adapter.close();
 		return true;
@@ -137,7 +138,7 @@ public class RailStationPre extends Activity {
 
 	// menu onclick event should be like below. Different from button events
 	public boolean refreshList(MenuItem item) {
-		new RailController().execute(stationCode);
+		new BusController().execute(stationCode);
 		// click event: first trigger Listenerning, if return false, transfer to
 		// this method
 		// if return true, stop conducting
@@ -152,27 +153,13 @@ public class RailStationPre extends Activity {
 	// 逻辑未分离
 	public void init() {
 		progressDialog.show();
-		new RailController().execute(stationCode);
+		new BusController().execute(stationCode);
 	}
 
 	// Initialize all views and get data from previous for further use
-	public void initViewFromRailFragment() {
-
-		// Get data from previous fragment for the collection
-
-		stationCode = intent.getStringExtra("stationCode");
-		stationName = intent.getStringExtra("stationName");
-		// Because the line has been transfered to this activity, so the station
-		// prediction list could be optimized
-		line = intent.getStringExtra("line");
-		// default value = -1
-		array_position = intent.getIntExtra("position", -1);
-		// 取出经纬度
-		latArray = intent.getIntExtra("latitude", -1);
-		lonArray = intent.getIntExtra("longitude", -1);
-		lat = getResources().getStringArray(latArray)[array_position];
-		lon = getResources().getStringArray(lonArray)[array_position];
-
+	public void initViewFromBusFragment() {
+		// Get busStationCode from previous fragment for requesting
+		stationCode = intent.getStringExtra("busStationCode");
 		// latitude = getResources().getStringArray(R.array.)
 		listView = (ListView) findViewById(R.id.showTrainStation);
 		// change addToCollection Button state of clickable
@@ -194,23 +181,21 @@ public class RailStationPre extends Activity {
 	}
 
 	// RailController
-	protected class RailController extends
-			AsyncTask<String, Integer, List<RailStationPrediction>> {
+	protected class BusController extends
+			AsyncTask<String, Integer, List<BusStationPrediction>> {
 
 		// extends
 		@Override
-		protected List<RailStationPrediction> doInBackground(
+		protected List<BusStationPrediction> doInBackground(
 				String... stationCode) {
-
-			System.out.println(lat + "," + lon);
 
 			HttpClient httpclient;
 			// 请求url
 			String url;
-			url = "http://api.wmata.com/StationPrediction.svc/json/GetPrediction/"
-					+ stationCode[0] + "?api_key=kfgpmgvfgacx98de9q3xazww";
+			url = "http://api.wmata.com/NextBusService.svc/json/jPredictions?StopID="
+					+ stationCode[0] + "&api_key=kfgpmgvfgacx98de9q3xazww";
 
-			// 标示代表 RailStationPrediction
+			// 标示代表 BusStationPrediction
 			int index = 1;
 			HttpGet httpGet = new HttpGet(url);
 			httpclient = new DefaultHttpClient();
@@ -226,9 +211,12 @@ public class RailStationPre extends Activity {
 					while ((line = br.readLine()) != null) {
 						result.append(line);
 					}
+					System.out.println(stationCode[0]);
 					// 数据解析
-					railstationpredictions = parseJSON(result.toString(), index);
+					busStationPredictions = parseJSON(result.toString(), index);
+					
 					// 可以更改的地方，是否可以使用服务对数据进行渲染 handleMessage();
+
 				}
 
 			} catch (ClientProtocolException e) {
@@ -239,44 +227,40 @@ public class RailStationPre extends Activity {
 				e.printStackTrace();
 			}
 
-			return railstationpredictions;
+			return busStationPredictions;
 		}
 
 		@Override
 		protected void onPostExecute(
-				List<RailStationPrediction> railstationpredictions) {
+				List<BusStationPrediction> busStationPredictions) {
 			// TODO Auto-generated method stub
-			// List<RailStationPrediction> railstationpredictions = null;
 			List<Map<String, Object>> listMap;
-			RailStationPrediction railstationprediction;
+			BusStationPrediction busStationPrediction;
 
 			listMap = new ArrayList<Map<String, Object>>();
-			for (int i = 0; i < railstationpredictions.size(); i++) {
-				if ((railstationprediction = railstationpredictions.get(i)) != null) {
+			for (int i = 0; i < busStationPredictions.size(); i++) {
+				if ((busStationPrediction = busStationPredictions.get(i)) != null) {
 					Map<String, Object> map = new HashMap<String, Object>();
-					int image = drawableSelection(railstationprediction
-							.getLINE().toString());
-					map.put("img", image);
-					map.put("lines", railstationprediction.getLINE().toString());
-					map.put("mins", railstationprediction.getMIN().toString());
-					map.put("destinationame", railstationprediction
-							.getDESTINATIONNAME().toString());
+					map.put("lines", busStationPrediction.getROOTID()
+							.toString());
+					map.put("mins", busStationPrediction.getMIN().toString());
+					map.put("destinationame", busStationPrediction
+							.getDIRECTIONTEXT().toString());
 					listMap.add(map);
 				}
 			}
-
 			SimpleAdapter simpleAdapter = new SimpleAdapter(getApplication(),
-					listMap, R.layout.activity_rail_station_pre_item,
-					new String[] { "img", "lines", "mins", "destinationame" },
-					new int[] { R.id.color_line, R.id.lineName,
-							R.id.predictionMin, R.id.destinationName });
+					listMap, R.layout.activity_bus_station_pre_item,
+					new String[] { "lines", "mins", "destinationame" },
+					new int[] { R.id.lineName, R.id.predictionMin,
+							R.id.destinationName });
 			// progressDialog dismiss in the onPostExecute method.
 			// if refreshing the list, do not have to dismiss the dialog
 			if (progressDialog.isShowing()) {
 				progressDialog.dismiss();
 			}
 			listView.setAdapter(simpleAdapter);
-			super.onPostExecute(railstationpredictions);
+			super.onPostExecute(busStationPredictions);
 		}
 	}
 
@@ -296,7 +280,7 @@ public class RailStationPre extends Activity {
 	}
 
 	// 解析JSON,并且封装
-	private List<RailStationPrediction> parseJSON(String result, int value) {
+	private List<BusStationPrediction> parseJSON(String result, int value) {
 		/**
 		 * case 1: RailStationPrediction; case 2:
 		 */
@@ -304,27 +288,25 @@ public class RailStationPre extends Activity {
 		case 1:
 
 			// Model: railStationPrediction
-			RailStationPrediction railStationPrediction;
+			BusStationPrediction busStationPrediction;
 			try {
 
-				List<RailStationPrediction> railstationpredictions = new ArrayList<RailStationPrediction>();
+				List<BusStationPrediction> busStationPredictions = new ArrayList<BusStationPrediction>();
 				JSONObject jsonobject = new JSONObject(result);
-				JSONArray jsonarray = jsonobject.getJSONArray("Trains");
+				JSONArray jsonarray = jsonobject.getJSONArray("Predictions");
 				for (int i = 0; i < jsonarray.length(); i++) {
 					JSONObject jsonObject = jsonarray.getJSONObject(i);
-					railStationPrediction = new RailStationPrediction(
-							jsonObject.getString("Line"),
-							jsonObject.getString("Min"),
-							jsonObject.getString("Destination"),
-							jsonObject.getString("DestinationName"));
-					railstationpredictions.add(railStationPrediction);
+					busStationPrediction = new BusStationPrediction(
+							jsonObject.getString("RouteID"),
+							jsonObject.getString("Minutes"),
+							jsonObject.getString("DirectionText"));
+					busStationPredictions.add(busStationPrediction);
 				}
-				return railstationpredictions;
+				return busStationPredictions;
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			// Add more cases, if having more url requests
 
 		default:

@@ -82,7 +82,7 @@ public class Rail extends Activity {
 					listMap.add(listitem);
 				}
 				SimpleAdapter = new SimpleAdapter(getApplicationContext(),
-						listMap, R.layout.rail_activity_item, new String[] {
+						listMap, R.layout.fragment_rail_item, new String[] {
 								"array", "code" }, new int[] {
 								R.id.stationName, R.id.stationCode });
 				listview.setAdapter(SimpleAdapter);

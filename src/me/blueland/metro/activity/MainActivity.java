@@ -3,11 +3,10 @@ package me.blueland.metro.activity;
 import me.blueland.metro.R;
 import me.blueland.metro.fragment.BusFragment;
 import me.blueland.metro.fragment.CollectionFragment;
+import me.blueland.metro.fragment.MapFragment;
 import me.blueland.metro.fragment.RailFragment;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
 import android.view.WindowManager;
@@ -52,13 +51,12 @@ public class MainActivity extends FragmentActivity {
 		mTabHost.addTab(mTabHost.newTabSpec("tab3").setIndicator(null, null),
 				RailFragment.class, null);
 		mTabHost.addTab(mTabHost.newTabSpec("tab4").setIndicator(null, null),
-				RailFragment.class, null);
+				MapFragment.class, null);
 		tabOne = mTabHost.getTabWidget().getChildAt(0);
 		tabTwo = mTabHost.getTabWidget().getChildAt(1);
 		tabThree = mTabHost.getTabWidget().getChildAt(2);
 		tabFour = mTabHost.getTabWidget().getChildAt(3);
 		tabFive = mTabHost.getTabWidget().getChildAt(4);
-
 		// refresh views to change background for each
 		refreshTab();
 
@@ -104,7 +102,6 @@ public class MainActivity extends FragmentActivity {
 		mTabHost.setCurrentTab(2);
 	}
 
-
 	private void refreshTab() {
 		tabOne.setBackground(getResources().getDrawable(R.drawable.metro_un));
 		tabTwo.setBackground(getResources().getDrawable(R.drawable.bus_un));
@@ -112,5 +109,6 @@ public class MainActivity extends FragmentActivity {
 				R.drawable.favorite_un));
 		tabFour.setBackground(getResources().getDrawable(R.drawable.nearby_un));
 		tabFive.setBackground(getResources().getDrawable(R.drawable.map_un));
+		// System.out.println(tabOne.getWidth() + "____" + tabOne.getHeight());
 	}
 }
