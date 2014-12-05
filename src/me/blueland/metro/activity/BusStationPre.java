@@ -10,6 +10,7 @@ import java.util.Map;
 
 import me.blueland.metro.R;
 import me.blueland.metro.database.DBAdapter;
+import me.blueland.metro.model.BusStation;
 import me.blueland.metro.model.BusStationPrediction;
 import me.blueland.metro.model.RailStationPrediction;
 
@@ -50,6 +51,7 @@ public class BusStationPre extends Activity {
 	private ProgressDialog progressDialog;
 	private ActionBar actionBar;
 	private List<BusStationPrediction> busStationPredictions;
+	// To add to collection;
 	private String stationCode;
 	private String stationName;
 	private String line;
@@ -164,7 +166,7 @@ public class BusStationPre extends Activity {
 		listView = (ListView) findViewById(R.id.showTrainStation);
 		// change addToCollection Button state of clickable
 		progressDialog = new ProgressDialog(this);
-		progressDialog.setMessage("Loading At least Faster Than Trains!");
+		progressDialog.setMessage("Loading Faster Than Buses!");
 	}
 
 	// clicked through listitem from collection fragment.
@@ -214,7 +216,7 @@ public class BusStationPre extends Activity {
 					System.out.println(stationCode[0]);
 					// 数据解析
 					busStationPredictions = parseJSON(result.toString(), index);
-					
+
 					// 可以更改的地方，是否可以使用服务对数据进行渲染 handleMessage();
 
 				}

@@ -108,10 +108,13 @@ public class BusFragment extends Fragment {
 				String busStationCode = ((TextView) view
 						.findViewById(R.id.busStationCode)).getText()
 						.toString();
-				System.out.println(busStationCode);
+				String busStationName = ((TextView) view
+						.findViewById(R.id.busStationName)).getText()
+						.toString();
 				// Tell the activity from BusFragment
 				intent.putExtra("intent", "BusFragment");
 				intent.putExtra("busStationCode", busStationCode);
+				intent.putExtra("busStationName", busStationName);
 				startActivity(intent);
 			}
 		};
