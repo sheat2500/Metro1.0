@@ -95,7 +95,6 @@ public class CollectionFragment extends Fragment {
 				// TODO Auto-generated method stub
 				
 			}
-			
 		};
 
 	}
