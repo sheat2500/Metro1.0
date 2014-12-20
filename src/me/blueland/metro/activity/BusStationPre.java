@@ -10,9 +10,7 @@ import java.util.Map;
 
 import me.blueland.metro.R;
 import me.blueland.metro.database.DBAdapter;
-import me.blueland.metro.model.BusStation;
 import me.blueland.metro.model.BusStationPrediction;
-import me.blueland.metro.model.RailStationPrediction;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,9 +32,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 /**
  * 
@@ -46,7 +45,7 @@ import android.widget.SimpleAdapter;
 
 public class BusStationPre extends Activity {
 
-	private Menu menu;
+	private MenuItem addToCollection;
 	private ListView listView;
 	private ProgressDialog progressDialog;
 	private ActionBar actionBar;
@@ -65,6 +64,37 @@ public class BusStationPre extends Activity {
 	// store array_position in stationCode for getting related latitude and
 	// longtitude in array
 	private int array_position;
+
+	private OnMenuItemClickListener positiveItemClickListener = new OnMenuItemClickListener() {
+
+		@Override
+		public boolean onMenuItemClick(MenuItem item) {
+			// TODO Auto-generated method stub
+			adapter.open();
+			adapter.insertFavourate(line, stationName, stationCode, lat, lon,
+					"0");
+			item.setOnMenuItemClickListener(negitiveItemClickListener);
+			adapter.close();
+			Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT)
+					.show();
+			return true;
+		}
+	};
+
+	private OnMenuItemClickListener negitiveItemClickListener = new OnMenuItemClickListener() {
+
+		@Override
+		public boolean onMenuItemClick(MenuItem item) {
+			// TODO Auto-generated method stub
+			adapter.open();
+			adapter.deleteFavourite(stationName);
+			item.setOnMenuItemClickListener(positiveItemClickListener);
+			adapter.close();
+			Toast.makeText(getApplicationContext(), "delete",
+					Toast.LENGTH_SHORT).show();
+			return true;
+		}
+	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,18 +117,18 @@ public class BusStationPre extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		this.menu = menu;
 		MenuInflater menuinflater = new MenuInflater(this);
-		menuinflater.inflate(R.menu.menu_activity_railstationpre, menu);
+		menuinflater.inflate(R.menu.menu_activity_stationpre, menu);
+		addToCollection = menu.findItem(R.id.addToCollection);
+		addToCollection.setOnMenuItemClickListener(positiveItemClickListener);
 
-		// check the database whether has some record if have some, update the
-		// UI
 		adapter.open();
 		Cursor cursor = adapter.queryFavourate(stationCode);
 		if (cursor.getCount() != 0) {
 			// same value in the table, so change the menu item
-			MenuItem menuitem = menu.findItem(R.id.addToCollection);
-			menuitem.setEnabled(false);
+			addToCollection = menu.findItem(R.id.addToCollection);
+			addToCollection
+					.setOnMenuItemClickListener(negitiveItemClickListener);
 			adapter.close();
 		} else {
 			adapter.close();
@@ -129,15 +159,6 @@ public class BusStationPre extends Activity {
 		return true;
 	}
 
-	// Circle: Listener - button onClick event - callback function
-	public boolean addToCollection(MenuItem item) {
-		adapter.open();
-		adapter.insertFavourate(line, stationName, stationCode, lat, lon, "0");
-		item.setEnabled(false);
-		adapter.close();
-		return true;
-	}
-
 	// menu onclick event should be like below. Different from button events
 	public boolean refreshList(MenuItem item) {
 		new BusController().execute(stationCode);
@@ -161,6 +182,7 @@ public class BusStationPre extends Activity {
 	// Initialize all views and get data from previous for further use
 	public void initViewFromBusFragment() {
 		// Get busStationCode from previous fragment for requesting
+		stationName = intent.getStringExtra("busStationName");
 		stationCode = intent.getStringExtra("busStationCode");
 		// latitude = getResources().getStringArray(R.array.)
 		listView = (ListView) findViewById(R.id.showTrainStation);
@@ -171,7 +193,6 @@ public class BusStationPre extends Activity {
 
 	// clicked through listitem from collection fragment.
 	public void initViewFromCollectionFragment() {
-		stationCode = intent.getStringExtra("stationCode");
 		line = intent.getStringExtra("line");
 		stationCode = intent.getStringExtra("stationCode");
 		stationName = intent.getStringExtra("stationName");
@@ -182,7 +203,7 @@ public class BusStationPre extends Activity {
 		progressDialog.setMessage("Loading At least Faster Than Trains!");
 	}
 
-	// RailController
+	// BusController
 	protected class BusController extends
 			AsyncTask<String, Integer, List<BusStationPrediction>> {
 

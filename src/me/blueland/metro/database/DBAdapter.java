@@ -21,8 +21,8 @@ public class DBAdapter {
 	public static final String LONGITUDE = "longitude";
 	public static final String RAIL = "rail";
 	static final String DATABASE_CREATE = "CREATE TABLE favourite (_id	INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ "line	TEXT NOT NULL, stationName	TEXT NOT NULL, stationCode	TEXT NOT NULL,"
-			+ " latitude TEXT NOT NULL,longitude TEXT NOT NULL, rail TEXT NOT NULL);";
+			+ "line TEXT, stationName	TEXT, stationCode	TEXT,"
+			+ " latitude TEXT,longitude TEXT, rail TEXT);";
 
 	// "CREATE TABLE notebook (_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 	// +
@@ -85,20 +85,10 @@ public class DBAdapter {
 				null, null, null, null, null);
 	}
 
-	public boolean deleteFavourite(long rowId) {
-		return db.delete(DATABASE_TABLE, _ID + "=" + rowId, null) > 0;
+	public boolean deleteFavourite(String stationName) {
+		return db.delete(DATABASE_TABLE,
+				STATIONNAME + "='" + stationName + "'", null) > 0;
 	}
-
-	// public boolean updateNote(long rowId, String dateforsave,
-	// String dateforshow, String content, String title) {
-	// ContentValues contentvalue = new ContentValues();
-	// contentvalue.put(KEY_DATE_SAVE, dateforsave);
-	// contentvalue.put(KEY_DATE_SHOW, dateforshow);
-	// contentvalue.put(KEY_CONTENT, content);
-	// contentvalue.put(KEY_TITLE, title);
-	// return db.update(DATABASE_TABLE, contentvalue, KEY_ROWID + "=" + rowId,
-	// null) > 0;
-	// }
 
 	public boolean insertFavourate(String line, String stationName,
 			String stationCode, String latitude, String longitude, String rail) {

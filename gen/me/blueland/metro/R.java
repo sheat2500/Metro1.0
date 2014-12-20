@@ -2292,7 +2292,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
-        public static final int menu_activity_railstationpre=0x7f0d0001;
+        public static final int menu_activity_stationpre=0x7f0d0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

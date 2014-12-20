@@ -105,6 +105,7 @@ public class MainActivity extends FragmentActivity {
 	private void refreshTab() {
 		tabOne.setBackground(getResources().getDrawable(R.drawable.metro_un));
 		tabTwo.setBackground(getResources().getDrawable(R.drawable.bus_un));
+		System.out.println(tabOne.getWidth()+";"+tabOne.getHeight());
 		tabThree.setBackground(getResources().getDrawable(
 				R.drawable.favorite_un));
 		tabFour.setBackground(getResources().getDrawable(R.drawable.nearby_un));

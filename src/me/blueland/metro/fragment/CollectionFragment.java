@@ -73,7 +73,7 @@ public class CollectionFragment extends Fragment {
 				String stationCode = ((TextView) view
 						.findViewById(R.id.stationCode)).getText().toString();
 				RailStation railstation = collection_rail.get(position);
-				
+
 				Intent intent = new Intent(
 						"me.blueland.metro.activity.RailStationPre");
 				intent.putExtra("intent", "CollectionFragment");
@@ -83,17 +83,26 @@ public class CollectionFragment extends Fragment {
 				intent.putExtra("latitude", railstation.getLatitude());
 				intent.putExtra("longitude", railstation.getLongitude());
 				startActivity(intent);
-				
 			}
 		};
-		
-		BusonItemClickListener = new OnItemClickListener(){
+
+		BusonItemClickListener = new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				
+				BusStation busstation = collection_bus.get(position);
+				Intent intent = new Intent(
+						"me.blueland.metro.activity.BusStationPre");
+				intent.putExtra("intent", "CollectionFragment");
+				intent.putExtra("line", busstation.getLine());
+				intent.putExtra("stationCode", busstation.getStationCode());
+				intent.putExtra("stationName", busstation.getStationName());
+				intent.putExtra("latitude", busstation.getLatitude());
+				intent.putExtra("longitude", busstation.getLongitude());
+				startActivity(intent);
+
 			}
 		};
 
@@ -120,7 +129,7 @@ public class CollectionFragment extends Fragment {
 					collection_rail.add(rail);
 				} else {
 					BusStation bus = new BusStation(
-							cursor.getString(cursor.getColumnIndex("id")),
+							cursor.getString(cursor.getColumnIndex("_id")),
 
 							cursor.getString(cursor.getColumnIndex("line")),
 
@@ -136,12 +145,8 @@ public class CollectionFragment extends Fragment {
 			// Test
 			railAdapter = new RailArrayAdapter(getActivity(),
 					R.layout.fragment_collection_item, collection_rail);
-			
-			
-			// busAdapter = new BusArrayAdapter(getActivity(),
-			// R.layout.fragment_collection_item, collection_bus);
-			
-			
+			busAdapter = new BusArrayAdapter(getActivity(),
+					R.layout.fragment_collection_item, collection_bus);
 			listBus.setAdapter(busAdapter);
 			listBus.setOnItemClickListener(BusonItemClickListener);
 			listRail.setAdapter(railAdapter);

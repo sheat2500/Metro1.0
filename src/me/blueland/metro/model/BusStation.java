@@ -9,8 +9,8 @@ public class BusStation {
 	private String stationCode;
 	private String stationName;
 
-	public BusStation(String id, String line, String latitude,
-			String longitude, String stationCode, String stationName) {
+	public BusStation(String id, String line,String stationCode, String stationName, String latitude,
+			String longitude) {
 		this.id = id;
 		this.line = line;
 		this.latitude = latitude;

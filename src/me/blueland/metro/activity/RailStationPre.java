@@ -32,9 +32,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 /**
  * 
@@ -44,10 +45,9 @@ import android.widget.SimpleAdapter;
 
 public class RailStationPre extends Activity {
 
-	private Menu menu;
+	private MenuItem addToCollection;
 	private ListView listView;
 	private ProgressDialog progressDialog;
-	private Button button;
 	private ActionBar actionBar;
 	private List<RailStationPrediction> railstationpredictions;
 	private String stationCode;
@@ -58,7 +58,37 @@ public class RailStationPre extends Activity {
 	private String lat;
 	private String lon;
 	private Intent intent;
-	DBAdapter adapter = new DBAdapter(this);
+	private DBAdapter adapter = new DBAdapter(this);
+	private OnMenuItemClickListener positiveItemClickListener = new OnMenuItemClickListener() {
+
+		@Override
+		public boolean onMenuItemClick(MenuItem item) {
+			// TODO Auto-generated method stub
+			adapter.open();
+			adapter.insertFavourate(line, stationName, stationCode, lat, lon,
+					"1");
+			item.setOnMenuItemClickListener(negitiveItemClickListener);
+			adapter.close();
+			Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT)
+					.show();
+			return true;
+		}
+	};
+
+	private OnMenuItemClickListener negitiveItemClickListener = new OnMenuItemClickListener() {
+
+		@Override
+		public boolean onMenuItemClick(MenuItem item) {
+			// TODO Auto-generated method stub
+			adapter.open();
+			adapter.deleteFavourite(stationName);
+			item.setOnMenuItemClickListener(positiveItemClickListener);
+			adapter.close();
+			Toast.makeText(getApplicationContext(), "delete",
+					Toast.LENGTH_SHORT).show();
+			return true;
+		}
+	};
 
 	// store array_position in stationCode for getting related latitude and
 	// longtitude in array
@@ -84,18 +114,19 @@ public class RailStationPre extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		this.menu = menu;
+		// Default listerner is the PositiveItemClickListener
 		MenuInflater menuinflater = new MenuInflater(this);
-		menuinflater.inflate(R.menu.menu_activity_railstationpre, menu);
-
+		menuinflater.inflate(R.menu.menu_activity_stationpre, menu);
+		addToCollection = menu.findItem(R.id.addToCollection);
+		addToCollection.setOnMenuItemClickListener(positiveItemClickListener);
 		// check the database whether has some record if have some, update the
 		// UI
 		adapter.open();
 		Cursor cursor = adapter.queryFavourate(stationCode);
 		if (cursor.getCount() != 0) {
 			// same value in the table, so change the menu item
-			MenuItem menuitem = menu.findItem(R.id.addToCollection);
-			menuitem.setEnabled(false);
+			addToCollection
+					.setOnMenuItemClickListener(negitiveItemClickListener);
 			adapter.close();
 		} else {
 			adapter.close();
@@ -126,30 +157,23 @@ public class RailStationPre extends Activity {
 		return true;
 	}
 
-	// Circle: Listener - button onClick event - callback function
-	public boolean addToCollection(MenuItem item) {
-		adapter.open();
-		adapter.insertFavourate(line, stationName, stationCode, lat, lon, "1");
-		item.setEnabled(false);
-		adapter.close();
-		return true;
-	}
-
 	// menu onclick event should be like below. Different from button events
 	public boolean refreshList(MenuItem item) {
 		new RailController().execute(stationCode);
 		// click event: first trigger Listenerning, if return false, transfer to
 		// this method
 		// if return true, stop conducting
+		Toast.makeText(getApplicationContext(), "refresh", Toast.LENGTH_SHORT)
+				.show();
 		return true;
 	}
 
 	public boolean showMapPath(MenuItem item) {
-		System.out.println("before back");
+		Toast.makeText(getApplicationContext(), "showMap", Toast.LENGTH_SHORT)
+				.show();
 		return true;
 	}
 
-	// 逻辑未分离
 	public void init() {
 		progressDialog.show();
 		new RailController().execute(stationCode);
@@ -159,7 +183,6 @@ public class RailStationPre extends Activity {
 	public void initViewFromRailFragment() {
 
 		// Get data from previous fragment for the collection
-
 		stationCode = intent.getStringExtra("stationCode");
 		stationName = intent.getStringExtra("stationName");
 		// Because the line has been transfered to this activity, so the station
@@ -182,7 +205,6 @@ public class RailStationPre extends Activity {
 
 	// clicked through listitem from collection fragment.
 	public void initViewFromCollectionFragment() {
-		stationCode = intent.getStringExtra("stationCode");
 		line = intent.getStringExtra("line");
 		stationCode = intent.getStringExtra("stationCode");
 		stationName = intent.getStringExtra("stationName");
