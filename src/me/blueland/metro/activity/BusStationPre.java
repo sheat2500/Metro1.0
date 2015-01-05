@@ -238,8 +238,6 @@ public class BusStationPre extends Activity {
 					// 数据解析
 					busStationPredictions = parseJSON(result.toString(), index);
 
-					// 可以更改的地方，是否可以使用服务对数据进行渲染 handleMessage();
-
 				}
 
 			} catch (ClientProtocolException e) {
@@ -331,7 +329,6 @@ public class BusStationPre extends Activity {
 				e.printStackTrace();
 			}
 			// Add more cases, if having more url requests
-
 		default:
 			break;
 		}

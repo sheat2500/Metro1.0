@@ -11,5 +11,5 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
         android:scaleType="matrix"
-        android:src="@drawable/color_map_silverline_small" />
+        android:src="@drawable/map" />
 </LinearLayout>

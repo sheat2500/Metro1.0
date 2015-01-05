@@ -18,8 +18,8 @@
 -->
 <android.support.v7.internal.widget.ActionBarContextView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
         style="?attr/actionModeStyle"/>
-<!-- From: file:/Users/Te/Desktop/Android/Blueland/appcompat_v7/res/layout/abc_action_mode_bar.xml --><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/build/intermediates/exploded-aar/Android.Blueland/appcompat_v7/unspecified/res/layout/abc_action_mode_bar.xml -->
+<!-- From: file:/Users/Te/Desktop/Android/Blueland/appcompat_v7/res/layout/abc_action_mode_bar.xml --><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/build/intermediates/exploded-aar/Blueland/appcompat_v7/unspecified/res/layout/abc_action_mode_bar.xml -->

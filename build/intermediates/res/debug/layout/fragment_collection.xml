@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/bannerRail"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/blue" />
+
+    <ListView
+        android:id="@+id/showRailStations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_below="@+id/bannerRail" >
+    </ListView>
+
+    <ImageView
+        android:id="@+id/bannerBus"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/showRailStations"
+        android:background="@drawable/blue" />
+
+    <ListView
+        android:id="@+id/showBusStations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_below="@+id/bannerBus" >
+    </ListView>
+
+</LinearLayout><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/res/layout/fragment_collection.xml -->

@@ -18,5 +18,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/expanded_menu"
         android:layout_width="?attr/panelMenuListWidth"
-        android:layout_height="wrap_content"/>
-<!-- From: file:/Users/Te/Desktop/Android/Blueland/appcompat_v7/res/layout/abc_expanded_menu_layout.xml --><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/build/intermediates/exploded-aar/Android.Blueland/appcompat_v7/unspecified/res/layout/abc_expanded_menu_layout.xml -->
+        android:layout_height="wrap_content"
+        android:background="?attr/panelBackground"/>
+<!-- From: file:/Users/Te/Desktop/Android/Blueland/appcompat_v7/res/layout/abc_expanded_menu_layout.xml --><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/build/intermediates/exploded-aar/Blueland/appcompat_v7/unspecified/res/layout/abc_expanded_menu_layout.xml -->

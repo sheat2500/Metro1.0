@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/addToCollection"
+        android:icon="@drawable/button_addtocollection"
+        android:showAsAction="always"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/refreshList"
+        android:icon="@drawable/button_refreshlist"
+        android:onClick="refreshList"
+        android:showAsAction="always"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/showMapPath"
+        android:icon="@drawable/button_showmappath"
+        android:onClick="showMapPath"
+        android:showAsAction="always"
+        android:visible="true">
+    </item>
+
+</menu><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/res/menu/menu_activity_stationpre.xml -->

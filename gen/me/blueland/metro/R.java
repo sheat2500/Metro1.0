@@ -2116,19 +2116,20 @@ containing a value of this type.
         public static final int fresh_un=0x7f02003f;
         public static final int green=0x7f020040;
         public static final int ic_launcher=0x7f020041;
-        public static final int map_clicked=0x7f020042;
-        public static final int map_un=0x7f020043;
-        public static final int metro_clicked=0x7f020044;
-        public static final int metro_un=0x7f020045;
-        public static final int nearby_clicked=0x7f020046;
-        public static final int nearby_un=0x7f020047;
-        public static final int open_clicked=0x7f020048;
-        public static final int open_un=0x7f020049;
-        public static final int orange=0x7f02004a;
-        public static final int red=0x7f02004b;
-        public static final int silver=0x7f02004c;
-        public static final int smartmetro_small=0x7f02004d;
-        public static final int yellow=0x7f02004e;
+        public static final int map=0x7f020042;
+        public static final int map_clicked=0x7f020043;
+        public static final int map_un=0x7f020044;
+        public static final int metro_clicked=0x7f020045;
+        public static final int metro_un=0x7f020046;
+        public static final int nearby_clicked=0x7f020047;
+        public static final int nearby_un=0x7f020048;
+        public static final int open_clicked=0x7f020049;
+        public static final int open_un=0x7f02004a;
+        public static final int orange=0x7f02004b;
+        public static final int red=0x7f02004c;
+        public static final int silver=0x7f02004d;
+        public static final int smartmetro_small=0x7f02004e;
+        public static final int yellow=0x7f02004f;
     }
     public static final class id {
         public static final int action_bar=0x7f090033;

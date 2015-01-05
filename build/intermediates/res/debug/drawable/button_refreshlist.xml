@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- button background -->
+    <item android:drawable="@drawable/fresh_clicked" android:state_focused="true" android:state_pressed="false"/>
+    <item android:drawable="@drawable/fresh_clicked" android:state_focused="true" android:state_pressed="true"/>
+    <!-- click without releasing -->
+    <item android:drawable="@drawable/fresh_clicked" android:state_focused="false" android:state_pressed="true"/>
+    <item android:drawable="@drawable/fresh_un"/>
+
+</selector><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/res/drawable/button_refreshlist.xml -->
