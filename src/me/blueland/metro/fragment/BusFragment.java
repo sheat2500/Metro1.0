@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.blueland.metro.R;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,105 +20,110 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 public class BusFragment extends Fragment {
 
-	ListView busStationList;
-	SeekBar seekBar;
-	EditText editText;
-	SimpleAdapter simpleAdapter;
-	List<Map<String, Object>> listMap;
-	OnItemClickListener onItemClickListener;
+    ListView busStationList;
+    EditText editText;
+    SimpleAdapter simpleAdapter;
+    List<Map<String, Object>> listMap;
+    OnItemClickListener onItemClickListener;
+    double lat;
+    double lon;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		View v = inflater.inflate(R.layout.fragment_bus, container, false);
-		busStationList = (ListView) v.findViewById(R.id.busListView);
-		// seekBar = (SeekBar) v.findViewById(R.id.seekBar);
-		editText = (EditText) v.findViewById(R.id.editText);
-		listMap = new ArrayList<Map<String, Object>>();
-		String[] busStationName = getResources().getStringArray(
-				R.array.bus_station_name);
-		String[] busStationCode = getResources().getStringArray(
-				R.array.bus_station_code);
-		for (int i = 0; i < busStationName.length; i++) {
-			Map<String, Object> listitem = new HashMap<String, Object>();
-			listitem.put("busStationName", busStationName[i]);
-			listitem.put("busStationCode", busStationCode[i]);
-			listMap.add(listitem);
-		}
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        View v = inflater.inflate(R.layout.fragment_bus, container, false);
+        busStationList = (ListView) v.findViewById(R.id.busListView);
+        // seekBar = (SeekBar) v.findViewById(R.id.seekBar);
+        editText = (EditText) v.findViewById(R.id.editText);
+        listMap = new ArrayList<Map<String, Object>>();
+        String[] busStationName = getResources().getStringArray(
+                R.array.bus_station_name);
+        String[] busStationCode = getResources().getStringArray(
+                R.array.bus_station_code);
+        for (int i = 0; i < busStationName.length; i++) {
+            Map<String, Object> listitem = new HashMap<String, Object>();
+            listitem.put("busStationName", busStationName[i]);
+            listitem.put("busStationCode", busStationCode[i]);
+            listMap.add(listitem);
+        }
 
-		simpleAdapter = new SimpleAdapter(getActivity(), listMap,
-				R.layout.fragment_bus_item, new String[] { "busStationName",
-						"busStationCode" }, new int[] { R.id.busStationName,
-						R.id.busStationCode });
-		busStationList.setAdapter(simpleAdapter);
-		return v;
-	}
+        simpleAdapter = new SimpleAdapter(getActivity(), listMap,
+                R.layout.fragment_bus_item, new String[]{"busStationName",
+                "busStationCode"}, new int[]{R.id.busStationName,
+                R.id.busStationCode});
+        busStationList.setAdapter(simpleAdapter);
+        return v;
+    }
 
-	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		initListener();
-		busStationList.setOnItemClickListener(onItemClickListener);
-	}
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onActivityCreated(savedInstanceState);
+        initListener();
+        busStationList.setOnItemClickListener(onItemClickListener);
+    }
 
-	public void initListener() {
-		editText.addTextChangedListener(new TextWatcher() {
+    public void initListener() {
+        editText.addTextChangedListener(new TextWatcher() {
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				simpleAdapter.getFilter().filter(s);
-			}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                // TODO Auto-generated method stub
+                simpleAdapter.getFilter().filter(s);
+            }
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
 
-			}
+            }
 
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
 
-			}
-		});
+            }
+        });
 
-		onItemClickListener = new OnItemClickListener() {
+        onItemClickListener = new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(
-						"me.blueland.metro.activity.BusStationPre");
-				String busStationCode = ((TextView) view
-						.findViewById(R.id.busStationCode)).getText()
-						.toString();
-				String busStationName = ((TextView) view
-						.findViewById(R.id.busStationName)).getText()
-						.toString();
-				// Tell the activity from BusFragment
-				intent.putExtra("intent", "BusFragment");
-				intent.putExtra("busStationCode", busStationCode);
-				intent.putExtra("busStationName", busStationName);
-				startActivity(intent);
-			}
-		};
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(
+                        "me.blueland.metro.activity.BusStationPre");
+                String busStationCode = ((TextView) view
+                        .findViewById(R.id.busStationCode)).getText()
+                        .toString();
+                String busStationName = ((TextView) view
+                        .findViewById(R.id.busStationName)).getText()
+                        .toString();
+                lat = Double.parseDouble(getResources().getStringArray(R.array.bus_station_latitude)[position]);
+                lon = Double.parseDouble(getResources().getStringArray(R.array.bus_station_longitude)[position]);
+                // Tell the activity from BusFragment
+                intent.putExtra("intent", "BusFragment");
+                intent.putExtra("busStationCode", busStationCode);
+                intent.putExtra("busStationName", busStationName);
+                intent.putExtra("latitude",lat);
+                intent.putExtra("longitude", lon);
+                System.out.println(lat+"..."+lon);
+                startActivity(intent);
+            }
+        };
 
-	}
+    }
 }

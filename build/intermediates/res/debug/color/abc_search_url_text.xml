@@ -18,4 +18,4 @@
     <item android:state_pressed="true" android:color="@color/abc_search_url_text_pressed"/>
     <item android:state_selected="true" android:color="@color/abc_search_url_text_selected"/>
     <item android:color="@color/abc_search_url_text_normal"/>
-</selector><!-- From: file:/Users/Te/Desktop/Android/Blueland/appcompat_v7/res/color/abc_search_url_text.xml --><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/build/intermediates/exploded-aar/Blueland/appcompat_v7/unspecified/res/color/abc_search_url_text.xml -->
+</selector><!-- From: file:/Users/Te/Desktop/PROJECTS/MyApplication/Metro/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_search_url_text.xml -->

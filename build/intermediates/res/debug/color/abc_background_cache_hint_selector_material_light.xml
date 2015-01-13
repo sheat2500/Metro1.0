@@ -18,4 +18,4 @@
     <item android:state_accelerated="false" android:color="@color/background_material_light" />
     <item android:color="@android:color/transparent" />
 </selector>
-<!-- From: file:/Users/Te/Desktop/Android/Blueland/appcompat_v7/res/color/abc_background_cache_hint_selector_material_light.xml --><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/build/intermediates/exploded-aar/Blueland/appcompat_v7/unspecified/res/color/abc_background_cache_hint_selector_material_light.xml -->
+<!-- From: file:/Users/Te/Desktop/PROJECTS/MyApplication/Metro/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_background_cache_hint_selector_material_light.xml -->

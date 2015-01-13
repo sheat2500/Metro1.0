@@ -7,4 +7,4 @@
     <item android:drawable="@drawable/add_clicked" android:state_focused="false" android:state_pressed="true"/>
     <item android:drawable="@drawable/add_un"/>
 
-</selector><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/res/drawable/button_addtocollection.xml -->
+</selector><!-- From: file:/Users/Te/Desktop/PROJECTS/MyApplication/Metro/res/drawable/button_addtocollection.xml -->

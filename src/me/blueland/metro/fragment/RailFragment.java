@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +19,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -36,6 +40,9 @@ public class RailFragment extends Fragment {
 	int longitude_id = R.array.blue_line_station_Latitude;
 	String line = "BLUE";
 
+
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,7 +55,6 @@ public class RailFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_rail, container, false);
 
 		initListener();
-
 		listview = (ListView) v.findViewById(R.id.showTrainStation);
 		red = (Button) v.findViewById(R.id.red_line);
 		blue = (Button) v.findViewById(R.id.blue_line);
@@ -76,6 +82,7 @@ public class RailFragment extends Fragment {
 	}
 
 	private void initListener() {
+
 		// button 监听器
 		buttonOnclickListener = new OnClickListener() {
 			@Override
@@ -175,5 +182,6 @@ public class RailFragment extends Fragment {
 				startActivity(intent);
 			}
 		};
+
 	}
 }

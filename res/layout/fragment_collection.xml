@@ -4,33 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ImageView
+    <TextView
         android:id="@+id/bannerRail"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@drawable/blue" />
+        android:background="@drawable/blue"
+        android:gravity="center"
+        android:text="Favourite Metro"
+        android:textColor="@color/white" />
 
     <ListView
         android:id="@+id/showRailStations"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@+id/bannerRail" >
+        android:layout_below="@+id/bannerRail"
+        android:layout_weight="1" >
     </ListView>
 
-    <ImageView
+    <TextView
         android:id="@+id/bannerBus"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_below="@+id/showRailStations"
-        android:background="@drawable/blue" />
+        android:background="@drawable/blue"
+        android:gravity="center"
+        android:text="Favourite Bus"
+        android:textColor="@color/white" />
 
     <ListView
         android:id="@+id/showBusStations"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@+id/bannerBus" >
+        android:layout_below="@+id/bannerBus"
+        android:layout_weight="1" >
     </ListView>
 
 </LinearLayout>

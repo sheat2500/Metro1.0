@@ -12,4 +12,4 @@
         android:contentDescription="@string/app_name"
         android:scaleType="matrix"
         android:src="@drawable/map" />
-</LinearLayout><!-- From: file:/Users/Te/Desktop/Android/Blueland/Metro/res/layout/fragment_map.xml -->
+</LinearLayout><!-- From: file:/Users/Te/Desktop/PROJECTS/MyApplication/Metro/res/layout/fragment_map.xml -->

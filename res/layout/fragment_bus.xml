@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true"
-        android:hint="Search products.."
+        android:hint="Search Your Destination"
         android:inputType="textVisiblePassword" />
 
     <!-- <SeekBar -->

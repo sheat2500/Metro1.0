@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="unspecified"><source path="/Users/Te/Desktop/Android/Blueland/Metro/build/intermediates/exploded-aar/Blueland/appcompat_v7/unspecified/assets"/></dataSet><dataSet config="main"><source path="/Users/Te/Desktop/Android/Blueland/Metro/assets"/></dataSet><dataSet config="debug"><source path="/Users/Te/Desktop/Android/Blueland/Metro/build-types/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/Te/Desktop/PROJECTS/MyApplication/Metro/assets"/></dataSet><dataSet config="debug"><source path="/Users/Te/Desktop/PROJECTS/MyApplication/Metro/build-types/debug/assets"/></dataSet></merger>

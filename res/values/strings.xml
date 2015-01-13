@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="rail_line_name">
-        <item>Green &#38;</item>
+        <item>Green</item>
         <item>Red</item>
         <item>Blue</item>
         <item>Silver</item>

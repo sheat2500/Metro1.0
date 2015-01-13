@@ -2,10 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- button background -->
-    <item android:drawable="@drawable/fresh_clicked" android:state_focused="true" android:state_pressed="false"/>
-    <item android:drawable="@drawable/fresh_clicked" android:state_focused="true" android:state_pressed="true"/>
-    <!-- click without releasing -->
-    <item android:drawable="@drawable/fresh_clicked" android:state_focused="false" android:state_pressed="true"/>
-    <item android:drawable="@drawable/fresh_un"/>
+    <item android:drawable="@drawable/fresh_normal"/>
+    <item android:drawable="@drawable/fresh_normal" android:state_pressed="true"/>
 
 </selector>

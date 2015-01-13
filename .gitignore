@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+assets
+bin
+.project
+manifest-merger-release-report.txt
+Metro.iml
+.classpath
+build
+libs
+gen
+Meterial
+release.jks
+
