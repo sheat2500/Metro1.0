@@ -120,6 +120,7 @@ public class CollectionFragment extends Fragment {
 		Cursor cursor = dbadapter.getAllFavourite();
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
+
 				if (cursor.getString(cursor.getColumnIndex("rail")).equals("1")) {
 					// 显示作用
 					RailStation rail = new RailStation(

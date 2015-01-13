@@ -44,6 +44,7 @@ public class NearByFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // First time to get CurrentLocation
     }
 
