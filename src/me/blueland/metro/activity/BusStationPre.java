@@ -33,8 +33,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
@@ -62,10 +64,8 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     private Intent intent;
     DBAdapter adapter = new DBAdapter(this);
 
-
-    // store array_position in stationCode for getting related latitude and
-    // longtitude in array
-    private int array_position;
+    // show Text if no bus;
+    TextView showTextIfNoBus;
 
     private OnMenuItemClickListener positiveItemClickListener = new OnMenuItemClickListener() {
 
@@ -77,8 +77,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                     "0");
             item.setOnMenuItemClickListener(negitiveItemClickListener);
             adapter.close();
-            Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT)
-                    .show();
+            item.setIcon(R.drawable.button_deletetocollection);
             return true;
         }
     };
@@ -92,8 +91,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
             adapter.deleteFavourite(stationName);
             item.setOnMenuItemClickListener(positiveItemClickListener);
             adapter.close();
-            Toast.makeText(getApplicationContext(), "delete",
-                    Toast.LENGTH_SHORT).show();
+            item.setIcon(R.drawable.button_addtocollection);
             return true;
         }
     };
@@ -107,6 +105,9 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         intent = getIntent();
+
+        showTextIfNoBus = (TextView) findViewById(R.id.showIfNoSchedule);
+
         if (intent.getStringExtra("intent").equals("BusFragment")) {
             initViewFromBusFragment();
         } else {
@@ -126,7 +127,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         menuinflater.inflate(R.menu.menu_activity_stationpre, menu);
         addToCollection = menu.findItem(R.id.addToCollection);
         addToCollection.setOnMenuItemClickListener(positiveItemClickListener);
-
+        addToCollection.setIcon(R.drawable.button_addtocollection);
         adapter.open();
         Cursor cursor = adapter.queryFavourate(stationCode);
         if (cursor.getCount() != 0) {
@@ -134,6 +135,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
             addToCollection = menu.findItem(R.id.addToCollection);
             addToCollection
                     .setOnMenuItemClickListener(negitiveItemClickListener);
+            addToCollection.setIcon(R.drawable.button_deletetocollection);
             adapter.close();
         } else {
             adapter.close();
@@ -189,8 +191,8 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         // Get busStationCode from previous fragment for requesting
         stationName = intent.getStringExtra("busStationName");
         stationCode = intent.getStringExtra("busStationCode");
-        lat = intent.getDoubleExtra("latitude",-1);
-        lon = intent.getDoubleExtra("longitude",-1);
+        lat = intent.getDoubleExtra("latitude", -1);
+        lon = intent.getDoubleExtra("longitude", -1);
         listView = (ListView) findViewById(R.id.showTrainStation);
         // change addToCollection Button state of clickable
         progressDialog = new ProgressDialog(this);
@@ -212,7 +214,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     @Override
     public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
         streetViewPanorama.setPosition(new LatLng(lat, lon));
-        System.out.println(lat+"..."+lon);
+        System.out.println(lat + "..." + lon);
     }
 
     // BusController
@@ -293,6 +295,12 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 progressDialog.dismiss();
             }
             listView.setAdapter(simpleAdapter);
+
+
+            //Make the note visible
+            if(simpleAdapter.isEmpty()){
+                showTextIfNoBus.setVisibility(View.VISIBLE);
+            }
             super.onPostExecute(busStationPredictions);
         }
     }

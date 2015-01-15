@@ -35,8 +35,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
@@ -100,6 +102,9 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
     };
 
 
+    //Show the note if no schedule
+    TextView showTextIfNoRail;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +115,9 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         intent = getIntent();
+
+        showTextIfNoRail = (TextView) findViewById(R.id.showIfNoSchedule);
+
         if (intent.getStringExtra("intent").equals("RailFragment")) {
             initViewFromRailFragment();
         } else {
@@ -207,12 +215,14 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
         // Get data from previous fragment for the collection
         stationCode = intent.getStringExtra("stationCode");
         stationName = intent.getStringExtra("stationName");
+
         // Because the line has been transfered to this activity, so the station
         // prediction list could be optimized
         line = intent.getStringExtra("line");
+
         // default value = -1
         array_position = intent.getIntExtra("position", -1);
-        // 取出经纬度
+
         latArray = intent.getIntExtra("latitude", -1);
         lonArray = intent.getIntExtra("longitude", -1);
         lat = Double.parseDouble(getResources().getStringArray(latArray)[array_position]);
@@ -220,12 +230,11 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
 
         // latitude = getResources().getStringArray(R.array.)
         listView = (ListView) findViewById(R.id.showTrainStation);
-        // change addToCollection Button state of clickable
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading At least Faster Than Trains!");
     }
 
-    // clicked through listitem from collection fragment.
+    // clicked through list items from collection fragment.
     public void initViewFromCollectionFragment() {
         line = intent.getStringExtra("line");
         stationCode = intent.getStringExtra("stationCode");
@@ -327,6 +336,9 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
                 progressDialog.dismiss();
             }
             listView.setAdapter(simpleAdapter);
+            if (simpleAdapter.isEmpty()) {
+                showTextIfNoRail.setVisibility(View.VISIBLE);
+            }
             super.onPostExecute(railstationpredictions);
         }
     }

@@ -12,6 +12,15 @@
         android:layout_height="0px"
         android:layout_weight="1"/>
 
+    <TextView
+        android:id="@+id/showIfNoSchedule"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:text="No Bus Schedule Right Now"
+        android:textSize="20dp"
+        android:visibility="invisible"/>
 
     <ListView
         android:id="@+id/showTrainStation"

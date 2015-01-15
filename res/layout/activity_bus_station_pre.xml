@@ -3,18 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="me.blueland.metro" >
+    tools:context="me.blueland.metro">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
 
         <ListView
             android:id="@+id/showTrainStation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
-        </ListView>
+            android:layout_weight="1"></ListView>
     </LinearLayout>
 
 </LinearLayout>

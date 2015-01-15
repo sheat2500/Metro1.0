@@ -69,7 +69,7 @@ public class NearByFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-//        mCurrentLocation = getCurrentLocation();
+        mCurrentLocation = getCurrentLocation();
 
         // Calculate the min distance rail stations, and inflate the listView
         new NearByRailStation().execute(mCurrentLocation);
@@ -93,6 +93,9 @@ public class NearByFragment extends Fragment {
                 String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Double.parseDouble(map.get(LAT).toString()), Double.parseDouble(map.get(LON).toString()));
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(intent);
+
+                //Jump to RailStationPre Activity
+
             }
         });
         return v;
@@ -100,8 +103,8 @@ public class NearByFragment extends Fragment {
 
     public Location getCurrentLocation() {
         mCurrentLocation = ((MainActivity) getActivity()).getmCurrentLocation();
-//        lat = String.valueOf(mCurrentLocation.getLatitude());
-//        lon = String.valueOf(mCurrentLocation.getLongitude());
+        lat = String.valueOf(mCurrentLocation.getLatitude());
+        lon = String.valueOf(mCurrentLocation.getLongitude());
         System.out.println(String.valueOf(mCurrentLocation.getLatitude()) + " ,...  " + String.valueOf(mCurrentLocation.getLongitude()));
         return mCurrentLocation;
     }
@@ -114,15 +117,15 @@ public class NearByFragment extends Fragment {
             Location mCurrentLocation = params[0];
 
 
-//            Double x = mCurrentLocation.getLatitude();
-//            Double y = mCurrentLocation.getLongitude();
+            double x = mCurrentLocation.getLatitude();
+            double y = mCurrentLocation.getLongitude();
 
             double radius = 500;
 
-            // Test
-            double x, y;
-            x = 38.8978168;
-            y = -77.0404246;
+//            // Test
+//            double x, y;
+//            x = 38.8978168;
+//            y = -77.0404246;
 
             try {
                 URL url = new URL("https://api.wmata.com/Rail.svc/json/jStationEntrances?Lat="
