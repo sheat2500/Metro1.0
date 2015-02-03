@@ -26,7 +26,9 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -99,7 +101,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rail_station_pre);
+        setContentView(R.layout.activity_bus_station_pre);
         actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -298,7 +300,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
 
 
             //Make the note visible
-            if(simpleAdapter.isEmpty()){
+            if (simpleAdapter.isEmpty()) {
                 showTextIfNoBus.setVisibility(View.VISIBLE);
             }
             super.onPostExecute(busStationPredictions);
@@ -353,5 +355,19 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 break;
         }
         return null;
+    }
+
+    public void callUber(View v) {
+        PackageManager pm = getPackageManager();
+        try {
+            pm.getPackageInfo("com.ubercar",PackageManager.GET_ACTIVITIES);
+            Intent launchIntent = pm.getLaunchIntentForPackage("com.ubercab");
+            intent.setData(Uri.parse("uber://?action=setPickup&pickup=my_location"));
+            startActivity(launchIntent);
+        } catch (PackageManager.NameNotFoundException e) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.uber.com/sign-up?client_id=hZnIwqdtvTNknw8vnJ8DQFIkzHCDn40W"));
+            startActivity(intent);
+            e.printStackTrace();
+        }
     }
 }

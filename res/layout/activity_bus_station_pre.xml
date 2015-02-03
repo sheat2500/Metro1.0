@@ -5,18 +5,40 @@
     android:orientation="vertical"
     tools:context="me.blueland.metro">
 
-    <LinearLayout
+    <fragment
+        android:name="com.google.android.gms.maps.StreetViewPanoramaFragment"
+        android:id="@+id/streetviewpanorama"
         android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/showIfNoSchedule"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:text="No Bus Schedule Right Now"
+        android:textSize="20dp"
+        android:visibility="invisible" />
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
 
         <ListView
             android:id="@+id/showTrainStation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"></ListView>
-    </LinearLayout>
+            android:layout_height="match_parent" />
+
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="562dp"
+        android:layout_height="90dp"
+        android:src="@drawable/uber_button_grey"
+        android:background="@color/grey"
+        android:onClick="callUber" />
 
 </LinearLayout>

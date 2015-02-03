@@ -32,7 +32,6 @@ import me.blueland.metro.fragment.RailFragment;
  */
 public class MainActivity extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
 
-    Button blue;
     private FragmentTabHost mTabHost;
     View tabOne;
     View tabTwo;
@@ -128,7 +127,6 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.On
         createLocationRequest();
 
         // find tabhost view in collection_activity;
-
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(),

@@ -27,6 +27,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -282,7 +283,7 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
                 if (httpentity != null) {
                     BufferedReader br = new BufferedReader(
                             new InputStreamReader(httpentity.getContent()));
-                    String line = null;
+                    String line;
                     while ((line = br.readLine()) != null) {
                         result.append(line);
                     }
@@ -306,11 +307,10 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
         protected void onPostExecute(
                 List<RailStationPrediction> railstationpredictions) {
             // TODO Auto-generated method stub
-            // List<RailStationPrediction> railstationpredictions = null;
             List<Map<String, Object>> listMap;
             RailStationPrediction railstationprediction;
 
-            listMap = new ArrayList<Map<String, Object>>();
+            listMap = new ArrayList<>();
             for (int i = 0; i < railstationpredictions.size(); i++) {
                 if ((railstationprediction = railstationpredictions.get(i)) != null) {
                     Map<String, Object> map = new HashMap<String, Object>();
@@ -361,7 +361,7 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
     // 解析JSON,并且封装
     private List<RailStationPrediction> parseJSON(String result, int value) {
         /**
-         * case 1: RailStationPrediction; case 2:
+         * case 1: RailArrayAdapterPrediction; case 2:
          */
         switch (value) {
             case 1:
@@ -394,5 +394,21 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
                 break;
         }
         return null;
+    }
+
+    public void callUber(View v) {
+        PackageManager pm = this.getPackageManager();
+        try {
+            pm.getPackageInfo("com.ubercab", PackageManager.GET_ACTIVITIES);
+            // Do something awesome - the app is installed! Launch App.
+            Intent launchIntent = pm.getLaunchIntentForPackage("com.ubercab");
+            // Add current location info to the uri
+            launchIntent.setData(Uri.parse("uber://?action=setPickup&pickup=my_location"));
+            startActivity(launchIntent);
+        } catch (PackageManager.NameNotFoundException e) {
+            // No Uber app! Open Mobile Website.
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.uber.com/sign-up?client_id=hZnIwqdtvTNknw8vnJ8DQFIkzHCDn40W"));
+            startActivity(browserIntent);
+        }
     }
 }

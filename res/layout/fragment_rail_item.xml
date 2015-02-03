@@ -2,27 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@color/white">
 
-    <RelativeLayout
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/icon_rail" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/stationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="null"
+            android:fontFamily="Roboto regular"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:id="@+id/stationAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textStyle="italic"
+            android:textColor="@color/grey"
+            android:fontFamily="Roboto regular"
+            android:alpha="0.5"
+            android:text="null" />
 
         <TextView
             android:id="@+id/stationCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="asda"
             android:visibility="invisible" />
-    </RelativeLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

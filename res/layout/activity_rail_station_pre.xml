@@ -10,7 +10,7 @@
         android:id="@+id/streetviewpanorama"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/showIfNoSchedule"
@@ -18,14 +18,27 @@
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/black"
-        android:text="No Bus Schedule Right Now"
+        android:text="No Rail Schedule Right Now"
         android:textSize="20dp"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
-    <ListView
-        android:id="@+id/showTrainStation"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/showTrainStation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="562dp"
+        android:layout_height="90dp"
+        android:src="@drawable/uber_button_grey"
+        android:background="@color/grey"
+        android:onClick="callUber" />
 
 </LinearLayout>

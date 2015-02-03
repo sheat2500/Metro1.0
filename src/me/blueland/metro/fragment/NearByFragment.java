@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -68,11 +67,10 @@ public class NearByFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        mCurrentLocation = getCurrentLocation();
-
         // Calculate the min distance rail stations, and inflate the listView
-        new NearByRailStation().execute(mCurrentLocation);
+        if ((mCurrentLocation = getCurrentLocation()) != null) {
+            new NearByRailStation().execute(mCurrentLocation);
+        }
     }
 
     @Override
@@ -103,10 +101,12 @@ public class NearByFragment extends Fragment {
 
     public Location getCurrentLocation() {
         mCurrentLocation = ((MainActivity) getActivity()).getmCurrentLocation();
-        lat = String.valueOf(mCurrentLocation.getLatitude());
-        lon = String.valueOf(mCurrentLocation.getLongitude());
-        System.out.println(String.valueOf(mCurrentLocation.getLatitude()) + " ,...  " + String.valueOf(mCurrentLocation.getLongitude()));
-        return mCurrentLocation;
+        if (mCurrentLocation != null) {
+            lat = String.valueOf(mCurrentLocation.getLatitude());
+            lon = String.valueOf(mCurrentLocation.getLongitude());
+            return mCurrentLocation;
+        }
+        return null;
     }
 
     protected class NearByRailStation extends AsyncTask<Location, Integer, ArrayList<Entrance>> {

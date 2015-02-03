@@ -30,7 +30,6 @@ public class CollectionFragment extends Fragment {
 	ArrayList<BusStation> collection_bus;
 	ListView listBus;
 	ListView listRail;
-	Bundle bundle;
 
 	OnItemClickListener RailonItemClickListener;
 	OnItemClickListener BusonItemClickListener;
@@ -150,7 +149,6 @@ public class CollectionFragment extends Fragment {
 					collection_bus.add(bus);
 				}
 			}
-			// Test
 			railAdapter = new RailArrayAdapter(getActivity(),
 					R.layout.fragment_collection_item, collection_rail);
 			busAdapter = new BusArrayAdapter(getActivity(),

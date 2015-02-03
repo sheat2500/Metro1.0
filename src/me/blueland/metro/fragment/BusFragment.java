@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.blueland.metro.MetroApplication;
 import me.blueland.metro.R;
 
 import android.content.Intent;
@@ -44,24 +45,24 @@ public class BusFragment extends Fragment {
         // TODO Auto-generated method stub
         View v = inflater.inflate(R.layout.fragment_bus, container, false);
         busStationList = (ListView) v.findViewById(R.id.busListView);
-        // seekBar = (SeekBar) v.findViewById(R.id.seekBar);
         editText = (EditText) v.findViewById(R.id.editText);
-        listMap = new ArrayList<Map<String, Object>>();
-        String[] busStationName = getResources().getStringArray(
-                R.array.bus_station_name);
-        String[] busStationCode = getResources().getStringArray(
-                R.array.bus_station_code);
-        for (int i = 0; i < busStationName.length; i++) {
-            Map<String, Object> listitem = new HashMap<String, Object>();
-            listitem.put("busStationName", busStationName[i]);
-            listitem.put("busStationCode", busStationCode[i]);
-            listMap.add(listitem);
-        }
 
-        simpleAdapter = new SimpleAdapter(getActivity(), listMap,
-                R.layout.fragment_bus_item, new String[]{"busStationName",
-                "busStationCode"}, new int[]{R.id.busStationName,
-                R.id.busStationCode});
+//        listMap = new ArrayList<Map<String, Object>>();
+//        String[] busStationName = getResources().getStringArray(
+//                R.array.bus_station_name);
+//        String[] busStationCode = getResources().getStringArray(
+//                R.array.bus_station_code);
+//        for (int i = 0; i < busStationName.length; i++) {
+//            Map<String, Object> listitem = new HashMap<String, Object>();
+//            listitem.put("busStationName", busStationName[i]);
+//            listitem.put("busStationCode", busStationCode[i]);
+//            listMap.add(listitem);
+//        }
+
+        simpleAdapter = new SimpleAdapter(getActivity(), MetroApplication.getInstance().getmArrayListBusStops(),
+                R.layout.fragment_bus_item, new String[]{"busRouteID",
+                "busRouteName"}, new int[]{R.id.busRouteID,
+                R.id.busRouteName});
         busStationList.setAdapter(simpleAdapter);
         return v;
     }
@@ -106,18 +107,18 @@ public class BusFragment extends Fragment {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(
                         "me.blueland.metro.activity.BusStationPre");
-                String busStationCode = ((TextView) view
-                        .findViewById(R.id.busStationCode)).getText()
+                String busRouteID = ((TextView) view
+                        .findViewById(R.id.busRouteID)).getText()
                         .toString();
-                String busStationName = ((TextView) view
-                        .findViewById(R.id.busStationName)).getText()
+                String busRouteName = ((TextView) view
+                        .findViewById(R.id.busRouteName)).getText()
                         .toString();
                 lat = Double.parseDouble(getResources().getStringArray(R.array.bus_station_latitude)[position]);
                 lon = Double.parseDouble(getResources().getStringArray(R.array.bus_station_longitude)[position]);
                 // Tell the activity from BusFragment
                 intent.putExtra("intent", "BusFragment");
-                intent.putExtra("busStationCode", busStationCode);
-                intent.putExtra("busStationName", busStationName);
+                intent.putExtra("busStationCode", busRouteID);
+                intent.putExtra("busStationName", busRouteName);
                 intent.putExtra("latitude",lat);
                 intent.putExtra("longitude", lon);
                 System.out.println(lat+"..."+lon);
