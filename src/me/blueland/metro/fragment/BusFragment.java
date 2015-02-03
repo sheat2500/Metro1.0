@@ -1,33 +1,31 @@
 package me.blueland.metro.fragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.TextureView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
 import java.util.List;
 import java.util.Map;
 
 import me.blueland.metro.MetroApplication;
 import me.blueland.metro.R;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-
-public class BusFragment extends Fragment {
+public class BusFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     ListView busStationList;
-    EditText editText;
+    SearchView searchView;
     SimpleAdapter simpleAdapter;
     List<Map<String, Object>> listMap;
     OnItemClickListener onItemClickListener;
@@ -45,25 +43,19 @@ public class BusFragment extends Fragment {
         // TODO Auto-generated method stub
         View v = inflater.inflate(R.layout.fragment_bus, container, false);
         busStationList = (ListView) v.findViewById(R.id.busListView);
-        editText = (EditText) v.findViewById(R.id.editText);
 
-//        listMap = new ArrayList<Map<String, Object>>();
-//        String[] busStationName = getResources().getStringArray(
-//                R.array.bus_station_name);
-//        String[] busStationCode = getResources().getStringArray(
-//                R.array.bus_station_code);
-//        for (int i = 0; i < busStationName.length; i++) {
-//            Map<String, Object> listitem = new HashMap<String, Object>();
-//            listitem.put("busStationName", busStationName[i]);
-//            listitem.put("busStationCode", busStationCode[i]);
-//            listMap.add(listitem);
-//        }
+        searchView = (SearchView) v.findViewById(R.id.searchView);
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Search Bus Station by Name");
 
         simpleAdapter = new SimpleAdapter(getActivity(), MetroApplication.getInstance().getmArrayListBusStops(),
                 R.layout.fragment_bus_item, new String[]{"busRouteID",
                 "busRouteName"}, new int[]{R.id.busRouteID,
                 R.id.busRouteName});
         busStationList.setAdapter(simpleAdapter);
+        busStationList.setTextFilterEnabled(true);
         return v;
     }
 
@@ -76,28 +68,28 @@ public class BusFragment extends Fragment {
     }
 
     public void initListener() {
-        editText.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                // TODO Auto-generated method stub
-                simpleAdapter.getFilter().filter(s);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-
-            }
-        });
+//        editText.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before,
+//                                      int count) {
+//                // TODO Auto-generated method stub
+//                simpleAdapter.getFilter().filter(s);
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count,
+//                                          int after) {
+//                // TODO Auto-generated method stub
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                // TODO Auto-generated method stub
+//
+//            }
+//        });
 
         onItemClickListener = new OnItemClickListener() {
 
@@ -119,12 +111,30 @@ public class BusFragment extends Fragment {
                 intent.putExtra("intent", "BusFragment");
                 intent.putExtra("busStationCode", busRouteID);
                 intent.putExtra("busStationName", busRouteName);
-                intent.putExtra("latitude",lat);
+                intent.putExtra("latitude", lat);
                 intent.putExtra("longitude", lon);
-                System.out.println(lat+"..."+lon);
+                System.out.println(lat + "..." + lon);
                 startActivity(intent);
             }
         };
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        if (TextUtils.isEmpty(newText)) {
+            busStationList.clearTextFilter();
+        }
+        else{
+            busStationList.setFilterText(newText);
+            searchView.requestFocus();
+        }
+        return true;
     }
 }

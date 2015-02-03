@@ -307,30 +307,11 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         }
     }
 
-    private int drawableSelection(String color) {
-        if (color.equals("SV")) {
-            return R.drawable.silver;
-        } else if (color.equals("GR")) {
-            return R.drawable.green;
-        } else if (color.equals("RD")) {
-            return R.drawable.red;
-        } else if (color.equals("YL")) {
-            return R.drawable.yellow;
-        } else if (color.equals("OR")) {
-            return R.drawable.orange;
-        } else
-            return R.drawable.blue;
-    }
-
-    // 解析JSON,并且封装
     private List<BusStationPrediction> parseJSON(String result, int value) {
-        /**
-         * case 1: RailStationPrediction; case 2:
-         */
         switch (value) {
             case 1:
 
-                // Model: railStationPrediction
+                // Model: BusStationPrediction
                 BusStationPrediction busStationPrediction;
                 try {
 
@@ -360,7 +341,7 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     public void callUber(View v) {
         PackageManager pm = getPackageManager();
         try {
-            pm.getPackageInfo("com.ubercar",PackageManager.GET_ACTIVITIES);
+            pm.getPackageInfo("com.ubercar", PackageManager.GET_ACTIVITIES);
             Intent launchIntent = pm.getLaunchIntentForPackage("com.ubercab");
             intent.setData(Uri.parse("uber://?action=setPickup&pickup=my_location"));
             startActivity(launchIntent);
