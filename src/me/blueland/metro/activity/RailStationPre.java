@@ -11,6 +11,7 @@ import java.util.Map;
 
 import me.blueland.metro.R;
 import me.blueland.metro.database.DBAdapter;
+import me.blueland.metro.model.RailStation;
 import me.blueland.metro.model.RailStationPrediction;
 
 import org.apache.http.HttpEntity;
@@ -65,12 +66,9 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
     // longtitude in array
     private int array_position;
 
-    // Default for Testing
-    private int latArray;
-    private int lonArray;
-
     private double lat;
     private double lon;
+
     private Intent intent;
     private DBAdapter adapter = new DBAdapter(this);
     private OnMenuItemClickListener positiveItemClickListener = new OnMenuItemClickListener() {
@@ -224,10 +222,14 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
         // default value = -1
         array_position = intent.getIntExtra("position", -1);
 
-        latArray = intent.getIntExtra("latitude", -1);
-        lonArray = intent.getIntExtra("longitude", -1);
-        lat = Double.parseDouble(getResources().getStringArray(latArray)[array_position]);
-        lon = Double.parseDouble(getResources().getStringArray(lonArray)[array_position]);
+        lat = Double.parseDouble(intent.getStringExtra("lat"));
+        lon = Double.parseDouble(intent.getStringExtra("lon"));
+
+        //
+        System.out.println("!!!!" + lat + " ,  " + lon);
+        RailStation selectedRailStation = (RailStation) intent.getSerializableExtra("RailStation");
+        System.out.println(selectedRailStation.getStationName());
+
 
         // latitude = getResources().getStringArray(R.array.)
         listView = (ListView) findViewById(R.id.showTrainStation);

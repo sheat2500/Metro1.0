@@ -63,6 +63,7 @@ public class MetroApplication extends Application {
                 busStop.put("busRouteName", jsonArray.getJSONObject(i).getString("Name"));
                 mArrayListBusStops.add(busStop);
             }
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -81,6 +82,7 @@ public class MetroApplication extends Application {
                 stringBuilder.append(line);
             }
             JSONObject mJsonObject = new JSONObject(stringBuilder.toString());
+            mBufferedReader.close();
 
             // Red Line
             JSONArray mJsonArray = mJsonObject.getJSONArray("RD");
@@ -131,6 +133,17 @@ public class MetroApplication extends Application {
                 SV_stations.add(mRailStation);
             }
             line_RailStaton.put("SV", SV_stations);
+
+            // Silver Line
+            mJsonArray = mJsonObject.getJSONArray("GR");
+            ArrayList<RailStation> GR_stations = new ArrayList<>();
+            for (int i = 0; i < mJsonArray.length(); i++) {
+                JSONObject station = mJsonArray.getJSONObject(i);
+                RailStation mRailStation = new RailStation(station.getString("Code"), station.getString("Name"), station.getString("Lat"), station.getString("Lon"), station.getJSONObject("Address").getString("Street") + " " + station.getJSONObject("Address").getString("State"));
+                GR_stations.add(mRailStation);
+            }
+            line_RailStaton.put("GR", GR_stations);
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

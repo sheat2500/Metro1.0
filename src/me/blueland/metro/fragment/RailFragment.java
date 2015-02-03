@@ -46,13 +46,14 @@ public class RailFragment extends Fragment implements Button.OnClickListener {
             // postion for getting specific latitude and longitude in the
             // next activity
             RailStation clickedStation = railStations.get(position);
+            intent.putExtra("RailStation",clickedStation);
             intent.putExtra("intent", "RailFragment");
             intent.putExtra("line", line);
             intent.putExtra("position", position);
             intent.putExtra("stationCode", clickedStation.getStationCode());
             intent.putExtra("stationName", clickedStation.getStationName());
-            intent.putExtra("latitude", clickedStation.getLatitude());
-            intent.putExtra("longitude", clickedStation.getLongitude());
+            intent.putExtra("lat", clickedStation.getLatitude());
+            intent.putExtra("lon", clickedStation.getLongitude());
             startActivity(intent);
         }
     };
@@ -113,7 +114,7 @@ public class RailFragment extends Fragment implements Button.OnClickListener {
                 railStations = map_line.get("OR");
                 break;
             case R.id.silver_line:
-                railStations = map_line.get("SL");
+                railStations = map_line.get("SV");
                 break;
             case R.id.green_line:
                 railStations = map_line.get("GR");

@@ -1,6 +1,8 @@
 package me.blueland.metro.model;
 
-public class RailStation {
+import java.io.Serializable;
+
+public class RailStation implements Serializable {
 
     private String id;
     private String line;
