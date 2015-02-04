@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.blueland.metro.model.BusRoute;
 import me.blueland.metro.model.RailStation;
 
 /**
@@ -20,7 +21,7 @@ import me.blueland.metro.model.RailStation;
  */
 public class MetroApplication extends Application {
 
-    private static ArrayList<Map<String, String>> mArrayListBusStops;
+    private static ArrayList<BusRoute> mArrayListBusStops;
 
     /*
         Params:
@@ -58,10 +59,8 @@ public class MetroApplication extends Application {
             JSONArray jsonArray = jsonObject.getJSONArray("Routes");
             mArrayListBusStops = new ArrayList<>();
             for (int i = 0; i < jsonArray.length(); i++) {
-                Map<String, String> busStop = new HashMap<>();
-                busStop.put("busRouteID", jsonArray.getJSONObject(i).getString("RouteID"));
-                busStop.put("busRouteName", jsonArray.getJSONObject(i).getString("Name"));
-                mArrayListBusStops.add(busStop);
+                BusRoute busRoute = new BusRoute(jsonArray.getJSONObject(i).getString("RouteID"),jsonArray.getJSONObject(i).getString("Name"));
+                mArrayListBusStops.add(busRoute);
             }
             br.close();
         } catch (IOException e) {
@@ -133,7 +132,6 @@ public class MetroApplication extends Application {
                 SV_stations.add(mRailStation);
             }
             line_RailStaton.put("SV", SV_stations);
-
             // Silver Line
             mJsonArray = mJsonObject.getJSONArray("GR");
             ArrayList<RailStation> GR_stations = new ArrayList<>();
@@ -149,11 +147,9 @@ public class MetroApplication extends Application {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    public ArrayList<Map<String, String>> getmArrayListBusStops() {
+    public ArrayList<BusRoute> getmArrayListBusStops() {
         return mArrayListBusStops;
     }
 

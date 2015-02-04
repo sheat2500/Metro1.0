@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,21 +15,20 @@ import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import me.blueland.metro.MetroApplication;
 import me.blueland.metro.R;
+import me.blueland.metro.model.BusRoute;
 
 public class BusFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     ListView busStationList;
     SearchView searchView;
-    SimpleAdapter simpleAdapter;
-    List<Map<String, Object>> listMap;
+    ArrayList<Map<String, String>> mRouteArrayList;
     OnItemClickListener onItemClickListener;
-    double lat;
-    double lon;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,11 +48,18 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
         searchView.setSubmitButtonEnabled(true);
         searchView.setQueryHint("Search Bus Station by Name");
 
-        simpleAdapter = new SimpleAdapter(getActivity(), MetroApplication.getInstance().getmArrayListBusStops(),
-                R.layout.fragment_bus_item, new String[]{"busRouteID",
-                "busRouteName"}, new int[]{R.id.busRouteID,
-                R.id.busRouteName});
-        busStationList.setAdapter(simpleAdapter);
+        ArrayList<BusRoute> mBusRoutes = MetroApplication.getInstance().getmArrayListBusStops();
+        mRouteArrayList = new ArrayList<>();
+        for (int i = 0; i < mBusRoutes.size(); i++) {
+            Map<String, String> busRoute = new HashMap<>();
+            busRoute.put("routeId", mBusRoutes.get(i).getRouteId());
+            busRoute.put("routeName", mBusRoutes.get(i).getRouteName());
+            mRouteArrayList.add(busRoute);
+        }
+        String[] name = {"routeId", "routeName"};
+        int[] id = {R.id.busRouteID, R.id.busRouteName};
+        SimpleAdapter mBusRouteAdapter = new SimpleAdapter(getActivity(), mRouteArrayList, R.layout.fragment_bus_item, name, id);
+        busStationList.setAdapter(mBusRouteAdapter);
         busStationList.setTextFilterEnabled(true);
         return v;
     }
@@ -68,28 +73,6 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
     }
 
     public void initListener() {
-//        editText.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before,
-//                                      int count) {
-//                // TODO Auto-generated method stub
-//                simpleAdapter.getFilter().filter(s);
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count,
-//                                          int after) {
-//                // TODO Auto-generated method stub
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                // TODO Auto-generated method stub
-//
-//            }
-//        });
 
         onItemClickListener = new OnItemClickListener() {
 
@@ -97,27 +80,18 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
+
+
                 Intent intent = new Intent(
                         "me.blueland.metro.activity.BusStationPre");
-                String busRouteID = ((TextView) view
-                        .findViewById(R.id.busRouteID)).getText()
-                        .toString();
-                String busRouteName = ((TextView) view
-                        .findViewById(R.id.busRouteName)).getText()
-                        .toString();
-                lat = Double.parseDouble(getResources().getStringArray(R.array.bus_station_latitude)[position]);
-                lon = Double.parseDouble(getResources().getStringArray(R.array.bus_station_longitude)[position]);
-                // Tell the activity from BusFragment
+                String busRouteID = ((TextView) view.findViewById(R.id.busRouteName)).getText().toString();
+                String busRouteName = ((TextView) view.findViewById(R.id.busRouteID)).getText().toString();
+                BusRoute busRoute = new BusRoute(busRouteID, busRouteName);
                 intent.putExtra("intent", "BusFragment");
-                intent.putExtra("busStationCode", busRouteID);
-                intent.putExtra("busStationName", busRouteName);
-                intent.putExtra("latitude", lat);
-                intent.putExtra("longitude", lon);
-                System.out.println(lat + "..." + lon);
+                intent.putExtra("busRoute", busRoute);
                 startActivity(intent);
             }
         };
-
     }
 
     @Override
@@ -130,8 +104,7 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
 
         if (TextUtils.isEmpty(newText)) {
             busStationList.clearTextFilter();
-        }
-        else{
+        } else {
             busStationList.setFilterText(newText);
             searchView.requestFocus();
         }

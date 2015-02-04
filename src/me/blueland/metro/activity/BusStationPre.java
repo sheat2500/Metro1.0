@@ -1,27 +1,5 @@
 package me.blueland.metro.activity;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import me.blueland.metro.R;
-import me.blueland.metro.database.DBAdapter;
-import me.blueland.metro.model.BusStationPrediction;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -36,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -45,6 +24,36 @@ import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import me.blueland.metro.R;
+import me.blueland.metro.adapter.BusStationAdapter;
+import me.blueland.metro.database.DBAdapter;
+import me.blueland.metro.model.BusRoute;
+import me.blueland.metro.model.BusStation;
+import me.blueland.metro.model.BusStationPrediction;
 
 /**
  * @author Te
@@ -52,6 +61,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class BusStationPre extends Activity implements OnStreetViewPanoramaReadyCallback {
 
+    private Menu mMenu;
     private MenuItem addToCollection;
     private ListView listView;
     private ProgressDialog progressDialog;
@@ -65,6 +75,12 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     private double lon;
     private Intent intent;
     DBAdapter adapter = new DBAdapter(this);
+
+
+    // SlidingMenu
+    ListView menu_left_lv;
+    ListView menu_right_lv;
+
 
     // show Text if no bus;
     TextView showTextIfNoBus;
@@ -108,7 +124,32 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         actionBar.setDisplayHomeAsUpEnabled(true);
         intent = getIntent();
 
+        menu_left_lv = (ListView) findViewById(R.id.menu_left_lv);
+        menu_right_lv = (ListView) findViewById(R.id.menu_right_lv);
+
+        SlidingMenu menu_left = new SlidingMenu(this);
+        menu_left.setMode(SlidingMenu.LEFT);
+        menu_left.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu_left.setShadowWidthRes(R.dimen.slidingmenu_shadow_width);
+        menu_left.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu_left.setFadeDegree(0.35f);
+        menu_left.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+        menu_left.setMenu(R.layout.menu_left);
+
+
+        SlidingMenu menu_right = new SlidingMenu(this);
+        menu_right.setMode(SlidingMenu.RIGHT);
+        menu_right.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu_right.setShadowWidthRes(R.dimen.slidingmenu_shadow_width);
+        menu_right.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu_right.setFadeDegree(0.35f);
+        menu_right.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+        menu_right.setMenu(R.layout.menu_right);
+
+
         showTextIfNoBus = (TextView) findViewById(R.id.showIfNoSchedule);
+
+        initView();
 
         if (intent.getStringExtra("intent").equals("BusFragment")) {
             initViewFromBusFragment();
@@ -122,19 +163,102 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         init();
     }
 
+    private void initView() {
+        listView = (ListView) findViewById(R.id.showTrainStation);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Faster Than Buses!");
+
+        String routeId = ((BusRoute) intent.getSerializableExtra("busRoute")).getRouteId();
+        new GetBusStations().execute("https://api.wmata.com/Bus.svc/json/jRouteSchedule?RouteID=" + routeId + "&api_key=yvxzjc8fjhj3pgatt2kxqdab");
+    }
+
+    private class GetBusStations extends AsyncTask<String, Void, Map<String, ArrayList<BusStation>>> {
+
+
+        @Override
+        protected Map<String, ArrayList<BusStation>> doInBackground(String... params) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+
+            // Store JSON Analysis Result;
+            ArrayList<BusStation> mBusStation_direction0 = new ArrayList<>();
+            ArrayList<BusStation> mBusStation_direction1 = new ArrayList<>();
+            Map<String, ArrayList<BusStation>> map_2directions_busStations = new HashMap<>();
+
+            try {
+
+                URL url = new URL(params[0]);
+                InputStream is = url.openConnection().getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                while ((line = br.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                System.out.println(stringBuilder.toString());
+
+                // JSON analysis
+                JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+                // Direction 0;
+                JSONArray jsonArray_D0 = jsonObject.getJSONArray("Direction0");
+                JSONArray jsonArray_stopTimes_D0 = (jsonArray_D0.getJSONObject(0).getJSONArray("StopTimes"));
+                for (int i = 0; i < jsonArray_stopTimes_D0.length(); i++) {
+                    BusStation mBusStation = new BusStation(jsonArray_stopTimes_D0.getJSONObject(i).getString("StopID"), jsonArray_stopTimes_D0.getJSONObject(i).getString("StopName"));
+                    mBusStation_direction0.add(mBusStation);
+                }
+                map_2directions_busStations.put("Direction0", mBusStation_direction0);
+
+                // Direction 1;
+                JSONArray jsonArray_D1 = jsonObject.getJSONArray("Direction1");
+                JSONArray jsonArray_stopTimes_D1 = (jsonArray_D1.getJSONObject(0).getJSONArray("StopTimes"));
+                for (int i = 0; i < jsonArray_stopTimes_D1.length(); i++) {
+                    BusStation mBusStation = new BusStation(jsonArray_stopTimes_D1.getJSONObject(i).getString("StopID"), jsonArray_stopTimes_D1.getJSONObject(i).getString("StopName"));
+                    mBusStation_direction0.add(mBusStation);
+                }
+                map_2directions_busStations.put("Direction1", mBusStation_direction1);
+
+                return map_2directions_busStations;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Map<String, ArrayList<BusStation>> stringArrayListMap) {
+            super.onPostExecute(stringArrayListMap);
+            BusStationAdapter slidingMenu_left = new BusStationAdapter(getApplicationContext(), R.layout.slidingmenu_listview_item, stringArrayListMap.get("Direction0"));
+            menu_left_lv.setAdapter(slidingMenu_left);
+            BusStationAdapter slidingMenu_right = new BusStationAdapter(getApplicationContext(), R.layout.slidingmenu_listview_item, stringArrayListMap.get("Direction1"));
+            menu_left_lv.setAdapter(slidingMenu_right);
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // TODO Auto-generated method stub
+        mMenu = menu;
         MenuInflater menuinflater = new MenuInflater(this);
         menuinflater.inflate(R.menu.menu_activity_stationpre, menu);
         addToCollection = menu.findItem(R.id.addToCollection);
         addToCollection.setOnMenuItemClickListener(positiveItemClickListener);
         addToCollection.setIcon(R.drawable.button_addtocollection);
+
+        //renderCollectionIcon();
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void renderCollectionIcon() {
         adapter.open();
         Cursor cursor = adapter.queryFavourate(stationCode);
         if (cursor.getCount() != 0) {
             // same value in the table, so change the menu item
-            addToCollection = menu.findItem(R.id.addToCollection);
+            addToCollection = mMenu.findItem(R.id.addToCollection);
             addToCollection
                     .setOnMenuItemClickListener(negitiveItemClickListener);
             addToCollection.setIcon(R.drawable.button_deletetocollection);
@@ -142,8 +266,9 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         } else {
             adapter.close();
         }
-        return super.onCreateOptionsMenu(menu);
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -171,21 +296,22 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     // menu onclick event should be like below. Different from button events
     public boolean refreshList(MenuItem item) {
         new BusController().execute(stationCode);
-        // click event: first trigger Listenerning, if return false, transfer to
-        // this method
-        // if return true, stop conducting
         return true;
     }
 
     public boolean showMapPath(MenuItem item) {
-        System.out.println("before back");
+        Toast.makeText(getApplicationContext(), "showMap", Toast.LENGTH_SHORT)
+                .show();
+        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", lat, lon);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        this.startActivity(intent);
         return true;
     }
 
-    // 逻辑未分离
     public void init() {
         progressDialog.show();
-        new BusController().execute(stationCode);
+//        new BusController().execute(stationCode);
+
     }
 
     // Initialize all views and get data from previous for further use
@@ -229,10 +355,10 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 String... stationCode) {
 
             HttpClient httpclient;
-            // 请求url
+
             String url;
             url = "http://api.wmata.com/NextBusService.svc/json/jPredictions?StopID="
-                    + stationCode[0] + "&api_key=kfgpmgvfgacx98de9q3xazww";
+                    + stationCode[0] + "&api_key=yvxzjc8fjhj3pgatt2kxqdab";
 
             // 标示代表 BusStationPrediction
             int index = 1;
@@ -246,16 +372,14 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 if (httpentity != null) {
                     BufferedReader br = new BufferedReader(
                             new InputStreamReader(httpentity.getContent()));
-                    String line = null;
+                    String line;
                     while ((line = br.readLine()) != null) {
                         result.append(line);
                     }
                     System.out.println(stationCode[0]);
-                    // 数据解析
+
                     busStationPredictions = parseJSON(result.toString(), index);
-
                 }
-
             } catch (ClientProtocolException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -263,7 +387,6 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
             return busStationPredictions;
         }
 
