@@ -5,12 +5,18 @@
     android:orientation="vertical"
     tools:context="me.blueland.metro">
 
-    <fragment
-        android:name="com.google.android.gms.maps.StreetViewPanoramaFragment"
-        android:id="@+id/streetviewpanorama"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:id="@+id/framelayout"
+        android:visibility="invisible">
+        <fragment
+            android:name="com.google.android.gms.maps.StreetViewPanoramaFragment"
+            android:id="@+id/streetviewpanorama"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/showIfNoSchedule"

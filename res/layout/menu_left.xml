@@ -3,7 +3,31 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_margin="5dp"
+            android:fontFamily="Roboto"
+            android:text="Direction :"/>
+
+        <ToggleButton
+            android:id="@+id/togglebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="North"
+            android:textOff="South"
+            android:onClick="onToggleClicked" />
+
+    </LinearLayout>
 
     <ListView
         android:layout_height="match_parent"

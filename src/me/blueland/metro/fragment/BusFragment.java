@@ -84,8 +84,8 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
 
                 Intent intent = new Intent(
                         "me.blueland.metro.activity.BusStationPre");
-                String busRouteID = ((TextView) view.findViewById(R.id.busRouteName)).getText().toString();
-                String busRouteName = ((TextView) view.findViewById(R.id.busRouteID)).getText().toString();
+                String busRouteID = ((TextView) view.findViewById(R.id.busRouteID)).getText().toString();
+                String busRouteName = ((TextView) view.findViewById(R.id.busRouteName)).getText().toString();
                 BusRoute busRoute = new BusRoute(busRouteID, busRouteName);
                 intent.putExtra("intent", "BusFragment");
                 intent.putExtra("busRoute", busRoute);

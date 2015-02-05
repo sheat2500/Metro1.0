@@ -2,6 +2,7 @@ package me.blueland.metro.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,11 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
@@ -61,6 +64,8 @@ import me.blueland.metro.model.BusStationPrediction;
 
 public class BusStationPre extends Activity implements OnStreetViewPanoramaReadyCallback {
 
+    private BusStationAdapter busStationAdapter_d0;
+    private BusStationAdapter busStationAdapter_d1;
     private Menu mMenu;
     private MenuItem addToCollection;
     private ListView listView;
@@ -76,11 +81,25 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     private Intent intent;
     DBAdapter adapter = new DBAdapter(this);
 
+    // Store JSON Analysis Result;
+    ArrayList<BusStation> mBusStation_direction0 = new ArrayList<>();
+    ArrayList<BusStation> mBusStation_direction1 = new ArrayList<>();
+    Map<String, ArrayList<BusStation>> map_2directions_busStations = new HashMap<>();
+
+    // Out View of Google Street View
+    FrameLayout mFrameLayout;
+    StreetViewPanorama mStreetViewPanorama;
 
     // SlidingMenu
-    ListView menu_left_lv;
-    ListView menu_right_lv;
+    private ListView menu_left_lv;
 
+    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            progressDialog.show();
+            new GetBusSchedule().execute("https://api.wmata.com/NextBusService.svc/json/jPredictions?StopID=" + view.getTag() + "&api_key=yvxzjc8fjhj3pgatt2kxqdab");
+        }
+    };
 
     // show Text if no bus;
     TextView showTextIfNoBus;
@@ -118,14 +137,13 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_station_pre);
+
         actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         intent = getIntent();
 
-        menu_left_lv = (ListView) findViewById(R.id.menu_left_lv);
-        menu_right_lv = (ListView) findViewById(R.id.menu_right_lv);
 
         SlidingMenu menu_left = new SlidingMenu(this);
         menu_left.setMode(SlidingMenu.LEFT);
@@ -137,37 +155,25 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         menu_left.setMenu(R.layout.menu_left);
 
 
-        SlidingMenu menu_right = new SlidingMenu(this);
-        menu_right.setMode(SlidingMenu.RIGHT);
-        menu_right.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        menu_right.setShadowWidthRes(R.dimen.slidingmenu_shadow_width);
-        menu_right.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-        menu_right.setFadeDegree(0.35f);
-        menu_right.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-        menu_right.setMenu(R.layout.menu_right);
+        menu_left_lv = (ListView) findViewById(R.id.menu_left_lv);
+        menu_left_lv.setOnItemClickListener(onItemClickListener);
 
+        mFrameLayout = (FrameLayout) findViewById(R.id.framelayout);
 
         showTextIfNoBus = (TextView) findViewById(R.id.showIfNoSchedule);
 
         initView();
 
-        if (intent.getStringExtra("intent").equals("BusFragment")) {
-            initViewFromBusFragment();
-        } else {
-            initViewFromCollectionFragment();
-        }
-
         StreetViewPanoramaFragment streetViewPanoramaFragment = (StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetviewpanorama);
         streetViewPanoramaFragment.getStreetViewPanoramaAsync(this);
 
-        init();
     }
 
     private void initView() {
         listView = (ListView) findViewById(R.id.showTrainStation);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading Faster Than Buses!");
-
+        progressDialog.show();
         String routeId = ((BusRoute) intent.getSerializableExtra("busRoute")).getRouteId();
         new GetBusStations().execute("https://api.wmata.com/Bus.svc/json/jRouteSchedule?RouteID=" + routeId + "&api_key=yvxzjc8fjhj3pgatt2kxqdab");
     }
@@ -181,11 +187,6 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
             StringBuilder stringBuilder = new StringBuilder();
             String line;
 
-            // Store JSON Analysis Result;
-            ArrayList<BusStation> mBusStation_direction0 = new ArrayList<>();
-            ArrayList<BusStation> mBusStation_direction1 = new ArrayList<>();
-            Map<String, ArrayList<BusStation>> map_2directions_busStations = new HashMap<>();
-
             try {
 
                 URL url = new URL(params[0]);
@@ -194,7 +195,6 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 while ((line = br.readLine()) != null) {
                     stringBuilder.append(line);
                 }
-                System.out.println(stringBuilder.toString());
 
                 // JSON analysis
                 JSONObject jsonObject = new JSONObject(stringBuilder.toString());
@@ -212,10 +212,9 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 JSONArray jsonArray_stopTimes_D1 = (jsonArray_D1.getJSONObject(0).getJSONArray("StopTimes"));
                 for (int i = 0; i < jsonArray_stopTimes_D1.length(); i++) {
                     BusStation mBusStation = new BusStation(jsonArray_stopTimes_D1.getJSONObject(i).getString("StopID"), jsonArray_stopTimes_D1.getJSONObject(i).getString("StopName"));
-                    mBusStation_direction0.add(mBusStation);
+                    mBusStation_direction1.add(mBusStation);
                 }
                 map_2directions_busStations.put("Direction1", mBusStation_direction1);
-
                 return map_2directions_busStations;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -229,13 +228,57 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
 
         @Override
         protected void onPostExecute(Map<String, ArrayList<BusStation>> stringArrayListMap) {
+            busStationAdapter_d0 = new BusStationAdapter(getApplicationContext(), R.layout.slidingmenu_listview_item, map_2directions_busStations.get("Direction0"));
+            busStationAdapter_d1 = new BusStationAdapter(getApplicationContext(), R.layout.slidingmenu_listview_item, map_2directions_busStations.get("Direction1"));
+            menu_left_lv.setAdapter(busStationAdapter_d1);
+            progressDialog.dismiss();
             super.onPostExecute(stringArrayListMap);
-            BusStationAdapter slidingMenu_left = new BusStationAdapter(getApplicationContext(), R.layout.slidingmenu_listview_item, stringArrayListMap.get("Direction0"));
-            menu_left_lv.setAdapter(slidingMenu_left);
-            BusStationAdapter slidingMenu_right = new BusStationAdapter(getApplicationContext(), R.layout.slidingmenu_listview_item, stringArrayListMap.get("Direction1"));
-            menu_left_lv.setAdapter(slidingMenu_right);
+        }
+    }
+
+    private class GetBusSchedule extends AsyncTask<String, Void, ArrayList<Map<String, Object>>> {
+
+        StringBuilder result = new StringBuilder();
+        String line;
+
+        @Override
+        protected ArrayList<Map<String, Object>> doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                InputStream is = url.openConnection().getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                while ((line = br.readLine()) != null) {
+                    result.append(line);
+                }
+                JSONObject jsonObject = new JSONObject(result.toString());
+                
+
+
+
+
+
+
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
 
+        @Override
+        protected void onPostExecute(ArrayList<Map<String, Object>> maps) {
+            progressDialog.dismiss();
+
+            mStreetViewPanorama.getLocation();
+
+            mFrameLayout.setVisibility(View.VISIBLE);
+            super.onPostExecute(maps);
+        }
     }
 
     @Override
@@ -278,17 +321,6 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
                 // Click the back button, then back to previous activity
                 finish();
                 break;
-            case R.id.addToCollection:
-                System.out.println("2");
-                break;
-            case R.id.refreshList:
-                System.out.println("3");
-                break;
-            case R.id.showMapPath:
-                System.out.println("4");
-                break;
-            default:
-                break;
         }
         return true;
     }
@@ -306,12 +338,6 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         this.startActivity(intent);
         return true;
-    }
-
-    public void init() {
-        progressDialog.show();
-//        new BusController().execute(stationCode);
-
     }
 
     // Initialize all views and get data from previous for further use
@@ -472,6 +498,17 @@ public class BusStationPre extends Activity implements OnStreetViewPanoramaReady
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.uber.com/sign-up?client_id=hZnIwqdtvTNknw8vnJ8DQFIkzHCDn40W"));
             startActivity(intent);
             e.printStackTrace();
+        }
+    }
+
+    public void onToggleClicked(View v) {
+        boolean on = ((ToggleButton) v).isChecked();
+        if (on) {
+            // Enable vibrate
+            menu_left_lv.setAdapter(busStationAdapter_d0);
+        } else {
+            // Disable vibrate
+            menu_left_lv.setAdapter(busStationAdapter_d1);
         }
     }
 }

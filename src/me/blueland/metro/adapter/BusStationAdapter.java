@@ -8,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.Inflater;
 
 import me.blueland.metro.R;
 import me.blueland.metro.model.BusStation;
@@ -22,9 +20,10 @@ public class BusStationAdapter extends ArrayAdapter<BusStation> {
 
     private Context mContext;
     private int mResource;
-    private List<BusStation> mBusStations;
+    private ArrayList<BusStation> mBusStations;
+    private TextView tv;
 
-    public BusStationAdapter(Context context, int resource, List<BusStation> objects) {
+    public BusStationAdapter(Context context, int resource, ArrayList<BusStation> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
@@ -34,10 +33,10 @@ public class BusStationAdapter extends ArrayAdapter<BusStation> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View v = inflater.inflate(mResource, parent, false);
-        TextView tv = (TextView) v.findViewById(R.id.busStationName);
+        View v = inflater.inflate(mResource, null);
+        tv = (TextView) v.findViewById(R.id.busStationName);
         tv.setText(mBusStations.get(position).getStationName());
-        tv.setTag(position, mBusStations.get(position).getStationCode());
+        tv.setTag(mBusStations.get(position).getId());
         System.out.println("this is the tag" + tv.getTag());
         return v;
     }
