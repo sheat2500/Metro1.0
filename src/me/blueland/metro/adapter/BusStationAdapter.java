@@ -37,7 +37,7 @@ public class BusStationAdapter extends ArrayAdapter<BusStation> {
         tv = (TextView) v.findViewById(R.id.busStationName);
         tv.setText(mBusStations.get(position).getStationName());
         tv.setTag(mBusStations.get(position).getId());
-        System.out.println("this is the tag" + tv.getTag());
         return v;
     }
+
 }

@@ -2,13 +2,21 @@ package me.blueland.metro.model;
 
 public class BusStation {
 
+
     private String id;
     private String stationName;
-    private String line;
     private String latitude;
     private String longitude;
+    private String line;
     private String stationCode;
 
+
+    public BusStation(String id, String stationName, String latitude, String longitude) {
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.stationName = stationName;
+    }
 
     public BusStation(String id, String stationName) {
         this.id = id;

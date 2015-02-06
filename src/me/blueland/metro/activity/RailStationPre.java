@@ -265,8 +265,6 @@ public class RailStationPre extends Activity implements OnStreetViewPanoramaRead
         protected List<RailStationPrediction> doInBackground(
                 String... stationCode) {
 
-            System.out.println(lat + "," + lon);
-
             HttpClient httpclient;
             // 请求url
             String url;

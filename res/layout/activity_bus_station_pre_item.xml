@@ -12,19 +12,21 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/lineName"
+            android:id="@+id/busDirection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:fontFamily="Roboto"
             android:textColor="@color/black"
             android:textSize="15dp"
             android:layout_marginRight="10dp"/>
 
 
         <TextView
-            android:id="@+id/destinationName"
+            android:id="@+id/busName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="Roboto"
             android:ellipsize="end"
             android:maxLines="1"
             android:text=""
@@ -38,7 +40,7 @@
         android:gravity="center_vertical|right" >
 
         <TextView
-            android:id="@+id/predictionMin"
+            android:id="@+id/busMinute"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

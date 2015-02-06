@@ -28,7 +28,26 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
     ListView busStationList;
     SearchView searchView;
     ArrayList<Map<String, String>> mRouteArrayList;
-    OnItemClickListener onItemClickListener;
+    OnItemClickListener onItemClickListener = new OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view,
+                                int position, long id) {
+            // TODO Auto-generated method stub
+
+            Intent intent = new Intent(
+                    "me.blueland.metro.activity.BusStationPre");
+            String busRouteID = ((TextView) view.findViewById(R.id.busRouteID)).getText().toString();
+            String busRouteName = ((TextView) view.findViewById(R.id.busRouteName)).getText().toString();
+
+            System.out.println(busRouteID + "______"+ busRouteName);
+
+            BusRoute busRoute = new BusRoute(busRouteID, busRouteName);
+            intent.putExtra("intent", "BusFragment");
+            intent.putExtra("busRoute", busRoute);
+            startActivity(intent);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +60,8 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
         // TODO Auto-generated method stub
         View v = inflater.inflate(R.layout.fragment_bus, container, false);
         busStationList = (ListView) v.findViewById(R.id.busListView);
+
+        busStationList.setOnItemClickListener(onItemClickListener);
 
         searchView = (SearchView) v.findViewById(R.id.searchView);
         searchView.setIconifiedByDefault(false);
@@ -62,36 +83,6 @@ public class BusFragment extends Fragment implements SearchView.OnQueryTextListe
         busStationList.setAdapter(mBusRouteAdapter);
         busStationList.setTextFilterEnabled(true);
         return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onActivityCreated(savedInstanceState);
-        initListener();
-        busStationList.setOnItemClickListener(onItemClickListener);
-    }
-
-    public void initListener() {
-
-        onItemClickListener = new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // TODO Auto-generated method stub
-
-
-                Intent intent = new Intent(
-                        "me.blueland.metro.activity.BusStationPre");
-                String busRouteID = ((TextView) view.findViewById(R.id.busRouteID)).getText().toString();
-                String busRouteName = ((TextView) view.findViewById(R.id.busRouteName)).getText().toString();
-                BusRoute busRoute = new BusRoute(busRouteID, busRouteName);
-                intent.putExtra("intent", "BusFragment");
-                intent.putExtra("busRoute", busRoute);
-                startActivity(intent);
-            }
-        };
     }
 
     @Override

@@ -17,7 +17,7 @@
             android:textSize="20dp"
             android:layout_margin="5dp"
             android:fontFamily="Roboto"
-            android:text="Direction :"/>
+            android:text="Direction :" />
 
         <ToggleButton
             android:id="@+id/togglebutton"
@@ -30,7 +30,7 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/menu_left_lv"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/menu_left_lv" />
+        android:layout_width="match_parent" />
 </LinearLayout>
